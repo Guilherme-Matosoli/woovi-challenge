@@ -13,7 +13,6 @@
 
   &:has(input:checked) {
     border: 2px solid #03D69D;
-    border-top: 1px solid #03D79D;
 
     background: rgba(3, 214, 157, .05);
   }
