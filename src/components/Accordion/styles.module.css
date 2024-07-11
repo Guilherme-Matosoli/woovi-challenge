@@ -1,0 +1,39 @@
+.container {
+  width: 100%;
+  padding: 0 !important;
+
+  border-radius: none !important;
+  box-shadow: none !important;
+
+  border-bottom: 2px solid #E5E5E5 !important;
+}
+
+.text {
+  display: flex;
+  align-items: flex-start !important;
+  justify-content: space-between;
+
+  padding: 0 !important;
+
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 16px;
+  color: #4D4D4D;
+
+  padding: 0;
+}
+
+.text div {
+  display: flex;
+  align-items: center;
+
+  margin: 0 !important;
+}
+
+.description {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  color: #4D4D4D;
+
+}
