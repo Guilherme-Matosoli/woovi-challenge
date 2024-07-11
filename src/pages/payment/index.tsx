@@ -1,3 +1,4 @@
+import { AccordionUsage } from "../../components/Accordion";
 import { Button } from "../../components/Button";
 import { Deadline } from "../../components/Deadline";
 import { PaymentProgress } from "../../components/PaymentProgress";
@@ -26,7 +27,6 @@ export default function Payment() {
       <Deadline
         time={new Date()}
       />
-
       <PaymentProgress />
 
       <section className={styles.fee}>
@@ -37,6 +37,13 @@ export default function Payment() {
         <span className={styles.value}>
           Total: R$ 30.600,00
         </span>
+      </section>
+
+      <AccordionUsage />
+
+      <section className={styles.paymentId}>
+        <span>Identificador:</span>
+        <strong>2c1b951f356c4680b13ba1c9fc889c47</strong>
       </section>
     </main>
   )
