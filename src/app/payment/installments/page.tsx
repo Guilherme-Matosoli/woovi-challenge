@@ -2,7 +2,13 @@
 import { InstallmentCard } from "@/components/InstallmentCard";
 import styles from "./styles.module.css";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Button } from "@/components/Button";
+
+interface Installment {
+  quantity: number,
+  value: number
+}
 
 export default function Installments() {
   const [options, setOptions] = useState([
@@ -52,7 +58,13 @@ export default function Installments() {
         value: 454285
       }
     }
-  ])
+  ]);
+
+  const [optionSelected, setOptionSelected] = useState<Installment>();
+
+  useEffect(() => {
+    console.log(optionSelected)
+  }, [])
 
   return (
     <main className={styles.container}>
@@ -60,8 +72,13 @@ export default function Installments() {
         João, como você quer pagar?
       </h2>
 
+      <Button text="Continuar" disabled={!optionSelected ? true : false} />
+
       <section className={styles.oneTime}>
         <InstallmentCard
+          value={JSON.stringify(options[0].installment)}
+          onChange={e => setOptionSelected(JSON.parse(e.target.value))}
+
           installmentQuantity={options[0].installment.quantity}
           installmentValue={options[0].installment.value}
           mainTitle={options[0].mainTitle}
@@ -79,6 +96,9 @@ export default function Installments() {
                 index={index}
                 totalItems={options.length - 1}
 
+                value={JSON.stringify(item.installment)}
+                onChange={e => setOptionSelected(JSON.parse(e.target.value))}
+
                 installmentQuantity={item.installment.quantity}
                 installmentValue={item.installment.value}
                 mainTitle={item.mainTitle}
@@ -88,6 +108,8 @@ export default function Installments() {
           })
         }
       </section>
+
+      <Button text="Continuar" disabled={!optionSelected ? true : false} />
     </main>
   )
 }
