@@ -1,8 +1,9 @@
 "use client"
-import { InputHTMLAttributes, useEffect, useMemo } from "react";
+import { InputHTMLAttributes, useMemo } from "react";
 import { BenefitFlag } from "../BenefitFlag";
 import { RadioInput } from "../RadioInput";
 import styles from "./styles.module.css";
+import { currencyFormatter } from "../../utils/currencyFormater";
 
 interface InstallmentCardProps extends InputHTMLAttributes<HTMLInputElement> {
   installmentQuantity: number,
@@ -16,22 +17,17 @@ interface InstallmentCardProps extends InputHTMLAttributes<HTMLInputElement> {
 };
 
 export function InstallmentCard({ mainTitle, benefitText, installmentQuantity, installmentValue, index, totalItems, ...rest }: InstallmentCardProps) {
-  const formater = new Intl.NumberFormat('pt-BR', {
-    style: "currency",
-    currency: "BRL"
-  });
-
   const formatedQuantity = useMemo(() => {
     const divided = installmentValue / 100;
 
-    const formatedInstallment = formater.format(divided)
+    const formatedInstallment = currencyFormatter.format(divided)
 
     return formatedInstallment
   }, [installmentValue]);
 
   const formatedTotal = useMemo(() => {
     const divided = installmentValue / 100;
-    const formatedTotal = formater.format(divided * installmentQuantity)
+    const formatedTotal = currencyFormatter.format(divided * installmentQuantity)
 
     return formatedTotal
   }, [installmentQuantity]);
