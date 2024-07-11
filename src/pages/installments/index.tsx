@@ -3,6 +3,7 @@ import styles from "./styles.module.css";
 
 import { useState } from "react";
 import { Button } from "../../components/Button";
+import { useNavigate } from "react-router-dom";
 
 interface Installment {
   quantity: number,
@@ -61,13 +62,24 @@ export default function Installments() {
 
   const [optionSelected, setOptionSelected] = useState<Installment>();
 
+  const navigate = useNavigate();
+  function chooseInstallment() {
+    if (!optionSelected) return;
+
+    navigate("/payment/pay")
+  };
+
   return (
     <main className={styles.container}>
       <h2 className={styles.mainText}>
         João, como você quer pagar?
       </h2>
 
-      <Button text="Continuar" disabled={!optionSelected ? true : false} />
+      <Button
+        text="Continuar"
+        disabled={!optionSelected ? true : false}
+        onClick={chooseInstallment}
+      />
 
       <section className={styles.oneTime}>
         <InstallmentCard
@@ -104,7 +116,11 @@ export default function Installments() {
         }
       </section>
 
-      <Button text="Continuar" disabled={!optionSelected ? true : false} />
+      <Button
+        text="Continuar"
+        disabled={!optionSelected ? true : false}
+        onClick={chooseInstallment}
+      />
     </main>
   )
 }
