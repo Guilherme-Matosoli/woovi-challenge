@@ -1,4 +1,6 @@
 import { Button } from "../../components/Button";
+import { Deadline } from "../../components/Deadline";
+import { PaymentProgress } from "../../components/PaymentProgress";
 import { QrCode } from "../../components/QrCode";
 import styles from "./styles.module.css";
 
@@ -20,6 +22,22 @@ export default function Payment() {
           />
         </Button>
       </div>
+
+      <Deadline
+        time={new Date()}
+      />
+
+      <PaymentProgress />
+
+      <section className={styles.fee}>
+        <span className={styles.info}>
+          CET: 0,5%
+        </span>
+
+        <span className={styles.value}>
+          Total: R$ 30.600,00
+        </span>
+      </section>
     </main>
   )
 }
