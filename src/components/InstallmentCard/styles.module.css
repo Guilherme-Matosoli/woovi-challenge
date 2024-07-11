@@ -1,0 +1,150 @@
+.container {
+  position: relative;
+
+  width: 100%;
+  min-height: 95px;
+
+  border-radius: 10px;
+  border: 2px solid #E5E5E5;
+
+  transition: all .3s;
+
+  padding: 21px;
+
+  &:has(input:checked) {
+    border: 2px solid #03D69D;
+    border-top: 1px solid #03D79D;
+
+    background: rgba(3, 214, 157, .05);
+  }
+}
+
+.containerFirst {
+  position: relative;
+
+  width: 100%;
+  min-height: 95px;
+
+  border-radius: 10px 10px 0 0;
+  border: 2px solid #E5E5E5;
+
+  transition: background .3s;
+
+  padding: 21px;
+
+  &:has(input:checked) {
+    border: 2px solid #03D69D;
+
+    background: rgba(3, 214, 157, .05);
+  }
+}
+
+.containerLast {
+  position: relative;
+
+  width: 100%;
+  min-height: 95px;
+
+  border-radius: 0 0 10px 10px;
+  border: 2px solid #E5E5E5;
+  border-top: none;
+
+  transition: background .3s;
+
+  padding: 21px;
+
+  &:has(input:checked) {
+    border: 2px solid #03D69D;
+
+    background: rgba(3, 214, 157, .05);
+  }
+}
+
+.containerList {
+  position: relative;
+
+  width: 100%;
+  min-height: 95px;
+
+  border: 2px solid #E5E5E5;
+  border-top: none;
+
+  transition: background .3s;
+
+  padding: 21px;
+
+  &:has(input:checked) {
+    border: 2px solid #03D69D;
+
+    background: rgba(3, 214, 157, .05);
+  }
+}
+
+.mainCardInfo {
+  position: absolute;
+  bottom: 100%;
+  left: 20px;
+
+  transform: translateY(50%);
+
+  background-color: #E5E5E5;
+  border-radius: 100px;
+  padding: 0 20px;
+
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 18px;
+  color: #4D4D4D;
+}
+
+.hidden {
+  display: none;
+}
+
+.topSide {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+
+
+.installmentInfo {
+  font-family: 'Nunito', sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: #4D4D4D;
+
+  line-height: 32.74px;
+
+  & span {
+    font-weight: 800;
+  }
+}
+
+.bonusInfo {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  color: #03D69D;
+
+  line-height: 20px;
+  margin-top: 1px;
+
+  & strong {
+    font-weight: 800;
+  }
+}
+
+.total {
+  font-family: 'Nunito', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #AFAFAF;
+
+  line-height: 21.82px;
+
+  & strong {
+    font-weight: 800;
+  }
+}
