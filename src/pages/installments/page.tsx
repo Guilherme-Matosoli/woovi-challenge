@@ -1,9 +1,8 @@
-"use client"
-import { InstallmentCard } from "@/components/InstallmentCard";
+import { InstallmentCard } from "../../components/InstallmentCard";
 import styles from "./styles.module.css";
 
-import { useEffect, useState } from "react";
-import { Button } from "@/components/Button";
+import { useState } from "react";
+import { Button } from "../../components/Button";
 
 interface Installment {
   quantity: number,
@@ -11,7 +10,7 @@ interface Installment {
 }
 
 export default function Installments() {
-  const [options, setOptions] = useState([
+  const [options, _] = useState([
     {
       installment: {
         quantity: 1,
@@ -61,10 +60,6 @@ export default function Installments() {
   ]);
 
   const [optionSelected, setOptionSelected] = useState<Installment>();
-
-  useEffect(() => {
-    console.log(optionSelected)
-  }, [])
 
   return (
     <main className={styles.container}>
