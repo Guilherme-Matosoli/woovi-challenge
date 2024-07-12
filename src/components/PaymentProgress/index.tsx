@@ -17,7 +17,7 @@ export function PaymentProgress() {
               installmentNumber={installmentNumber}
               installmentsQuantity={installment?.quantity || 0}
               installmentValue={installment?.value || 0}
-              concluded={installmentNumber <= paymentSteps}
+              concluded={installmentNumber < paymentSteps}
             />
           )
         })
