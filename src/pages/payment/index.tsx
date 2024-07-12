@@ -1,18 +1,21 @@
+import { useContext } from "react";
 import { AccordionUsage } from "../../components/Accordion";
 import { Button } from "../../components/Button";
 import { Deadline } from "../../components/Deadline";
 import { PaymentProgress } from "../../components/PaymentProgress";
 import { QrCode } from "../../components/QrCode";
 import styles from "./styles.module.css";
+import { PaymentContext } from "../../contexts/PaymentContext";
 
 export default function Payment() {
+  const { installmentValue, total, pixInfo } = useContext(PaymentContext);
   return (
     <main className={styles.container}>
       <h2 className={styles.mainText}>
-        João, pague a entrada de R$ 15.300,00 pelo Pix
+        João, pague a entrada de {installmentValue} pelo Pix
       </h2>
 
-      <QrCode value="KDJSFGHDSFJGASDFGIADFSUHgGIAUDFGOUYADFGSUYADGSFUYGSERUFYGSURYGFUYERWGFUYEGRFUYWREG" />
+      <QrCode value={pixInfo.code} />
 
       <div className={styles.buttonWrapper}>
         <Button>
@@ -25,7 +28,7 @@ export default function Payment() {
       </div>
 
       <Deadline
-        time={new Date()}
+        time={pixInfo.expiresIn}
       />
       <PaymentProgress />
 
@@ -35,7 +38,7 @@ export default function Payment() {
         </span>
 
         <span className={styles.value}>
-          Total: R$ 30.600,00
+          Total: {total}
         </span>
       </section>
 
@@ -43,7 +46,7 @@ export default function Payment() {
 
       <section className={styles.paymentId}>
         <span>Identificador:</span>
-        <strong>2c1b951f356c4680b13ba1c9fc889c47</strong>
+        <strong>{pixInfo.identifier}</strong>
       </section>
     </main>
   )
