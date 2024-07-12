@@ -5,7 +5,7 @@ import { currencyFormatter } from "../../utils/currencyFormater";
 
 interface PaymentStepProps {
   index: number,
-  installmentsQuantity?: number,
+  installmentsQuantity: number,
   installmentValue: number,
 
   concluded?: boolean
@@ -23,7 +23,7 @@ export function PaymentStep({ index, installmentsQuantity, installmentValue, con
     <div className={styles.container}>
       <div className={styles.info}>
         <StepStatus
-          haveNext={index != installmentsQuantity}
+          haveNext={index + 1 != installmentsQuantity}
           checked={concluded}
         />
 
