@@ -1,4 +1,6 @@
+import { Button } from "../../../components/Button";
 import { Input } from "../../../components/Input";
+import { Select } from "../../../components/Select";
 import styles from "./styles.module.css";
 
 export function CreditCard() {
@@ -28,6 +30,15 @@ export function CreditCard() {
           label="CVV"
         />
       </section>
+
+      <Select
+        label="Parcelas"
+      />
+
+      <Button
+        text="Pagar"
+        type="submit"
+      />
     </form>
   )
 }
