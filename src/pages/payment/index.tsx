@@ -16,15 +16,15 @@ export default function Payment() {
     <main className={styles.container}>
       <h2 className={styles.mainText}>
         {
-          paymentSteps == 0 && `João, pague a entrada de ${installmentValue} no pix`
+          paymentSteps == 1 && `João, pague a entrada de ${installmentValue} no pix`
         }
 
         {
-          paymentSteps > 0 && paymentSteps + 1 != installment?.quantity && `João, pague a ${paymentSteps + 1}ª parcela em 1x no cartão`
+          paymentSteps > 1 && paymentSteps != installment?.quantity && `João, pague a ${paymentSteps}ª parcela em 1x no cartão`
         }
 
         {
-          paymentSteps + 1 == installment?.quantity && installment.quantity != 1 && `João, pague o restante em 1x no cartão`
+          paymentSteps == installment?.quantity && installment.quantity != 1 && `João, pague o restante em 1x no cartão`
         }
       </h2>
 
