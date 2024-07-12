@@ -41,7 +41,7 @@ export const PaymentContextProvider = ({ children }: PaymentContextProviderProps
     expiresIn: new Date()
   });
 
-  const [paymentSteps, setPaymentSteps] = useState(0);
+  const [paymentSteps, setPaymentSteps] = useState(1);
 
   const increaseInstallment = () => {
     setPaymentSteps(current => current + 1);
