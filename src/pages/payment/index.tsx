@@ -6,6 +6,7 @@ import { PaymentProgress } from "../../components/PaymentProgress";
 import { QrCode } from "../../components/QrCode";
 import styles from "./styles.module.css";
 import { PaymentContext } from "../../contexts/PaymentContext";
+import { copyToClipboard } from "../../utils/copyToClipboard";
 
 export default function Payment() {
   const { installmentValue, installment, total, pixInfo, paymentSteps } = useContext(PaymentContext);
@@ -28,7 +29,9 @@ export default function Payment() {
       <QrCode value={pixInfo.code} />
 
       <div className={styles.buttonWrapper}>
-        <Button>
+        <Button
+          onClick={() => copyToClipboard(pixInfo.code)}
+        >
           Clique para copiar QR CODE
           <img
             src="/copy-icon.svg"
