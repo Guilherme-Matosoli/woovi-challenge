@@ -1,36 +1,40 @@
-import { useMemo } from "react";
+import { useContext, useMemo } from "react";
 import { StepStatus } from "../StepStatus";
 import styles from "./styles.module.css";
 import { currencyFormatter } from "../../utils/currencyFormater";
+import { PaymentContext } from "../../contexts/PaymentContext";
 
 interface PaymentStepProps {
-  index: number,
+  installmentNumber: number,
   installmentsQuantity: number,
   installmentValue: number,
 
-  concluded?: boolean
+  concluded: boolean
 }
 
-export function PaymentStep({ index, installmentsQuantity, installmentValue, concluded }: PaymentStepProps) {
+export function PaymentStep({ installmentNumber, installmentsQuantity, installmentValue, concluded }: PaymentStepProps) {
   const formatedValue = useMemo(() => {
     const divided = installmentValue / 100;
 
     const formatedValue = currencyFormatter.format(divided);
     return formatedValue;
-  }, [installmentValue])
+  }, [installmentValue]);
+
+  const { paymentSteps } = useContext(PaymentContext);
 
   return (
     <div className={styles.container}>
       <div className={styles.info}>
         <StepStatus
-          haveNext={index + 1 != installmentsQuantity}
+          haveNext={installmentNumber != installmentsQuantity}
           checked={concluded}
+          actual={installmentNumber == paymentSteps}
         />
 
         <span className={styles.description}>
-          {index == 0 && "1ª entrada no pix"}
+          {installmentNumber == 0 && "1ª entrada no pix"}
 
-          {index != 0 && `${index + 1}ª no cartão`}
+          {installmentNumber != 0 && `${installmentNumber}ª no cartão`}
         </span>
       </div>
 
