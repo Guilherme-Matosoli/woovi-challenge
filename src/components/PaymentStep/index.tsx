@@ -32,7 +32,9 @@ export function PaymentStep({ installmentNumber, installmentsQuantity, installme
         />
 
         <span className={styles.description}>
-          {installmentNumber == 1 && "1ª entrada no pix"}
+          {installmentNumber == 1 && installmentsQuantity == 1 && "Pagamento no pix"}
+
+          {installmentNumber == 1 && installmentsQuantity != 1 && "1ª entrada no pix"}
 
           {installmentNumber != 1 && `${installmentNumber}ª no cartão`}
         </span>
