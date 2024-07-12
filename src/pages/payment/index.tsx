@@ -1,17 +1,15 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { AccordionUsage } from "../../components/Accordion";
-import { Button } from "../../components/Button";
 import { Deadline } from "../../components/Deadline";
 import { PaymentProgress } from "../../components/PaymentProgress";
-import { QrCode } from "../../components/QrCode";
 import styles from "./styles.module.css";
 import { PaymentContext } from "../../contexts/PaymentContext";
-import { copyToClipboard } from "../../utils/copyToClipboard";
+import { Pix } from "./pix";
+import { CreditCard } from "./creditCard";
 
 export default function Payment() {
   const { installmentValue, installment, total, pixInfo, paymentSteps } = useContext(PaymentContext);
 
-  const [copied, setCopied] = useState(false);
   return (
     <main className={styles.container}>
       <h2 className={styles.mainText}>
@@ -28,34 +26,9 @@ export default function Payment() {
         }
       </h2>
 
-      <QrCode value={pixInfo.code} />
-
-      <div className={styles.buttonWrapper}>
-        <Button
-          onClick={() => {
-            copyToClipboard(pixInfo.code);
-            setCopied(true);
-
-            setTimeout(() => {
-              setCopied(false);
-            }, 1500);
-          }}
-        >
-          {
-            copied
-              ?
-              "Copiado!"
-              :
-              <>
-                <img
-                  src="/copy-icon.svg"
-                  alt="Copiar"
-                />
-                Clique para copiar o QR CODE
-              </>
-          }
-        </Button>
-      </div>
+      {
+        paymentSteps == 1 ? <Pix /> : <CreditCard />
+      }
 
       <Deadline
         time={pixInfo.expiresIn}
