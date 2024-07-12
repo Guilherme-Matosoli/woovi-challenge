@@ -2,14 +2,16 @@ import styles from "./styles.module.css";
 import { BaseTextFieldProps, TextField } from "@mui/material"
 
 interface InputProps extends BaseTextFieldProps {
-  label: string
+  label: string,
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
 }
 
-export function Input({ label, ...rest }: InputProps) {
+export function Input({ label, onChange, ...rest }: InputProps) {
   return (
     <TextField
       className={styles.input}
       label={label}
+      onChange={onChange}
       {...rest}
 
       InputLabelProps={{
