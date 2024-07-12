@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AccordionUsage } from "../../components/Accordion";
 import { Button } from "../../components/Button";
 import { Deadline } from "../../components/Deadline";
@@ -10,6 +10,8 @@ import { copyToClipboard } from "../../utils/copyToClipboard";
 
 export default function Payment() {
   const { installmentValue, installment, total, pixInfo, paymentSteps } = useContext(PaymentContext);
+
+  const [copied, setCopied] = useState(false);
   return (
     <main className={styles.container}>
       <h2 className={styles.mainText}>
@@ -30,13 +32,28 @@ export default function Payment() {
 
       <div className={styles.buttonWrapper}>
         <Button
-          onClick={() => copyToClipboard(pixInfo.code)}
+          onClick={() => {
+            copyToClipboard(pixInfo.code);
+            setCopied(true);
+
+            setTimeout(() => {
+              setCopied(false);
+            }, 1500);
+          }}
         >
-          Clique para copiar QR CODE
-          <img
-            src="/copy-icon.svg"
-            alt="Copiar"
-          />
+          {
+            copied
+              ?
+              "Copiado!"
+              :
+              <>
+                <img
+                  src="/copy-icon.svg"
+                  alt="Copiar"
+                />
+                Clique para copiar o QR CODE
+              </>
+          }
         </Button>
       </div>
 
