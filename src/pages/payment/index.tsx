@@ -8,11 +8,21 @@ import styles from "./styles.module.css";
 import { PaymentContext } from "../../contexts/PaymentContext";
 
 export default function Payment() {
-  const { installmentValue, total, pixInfo } = useContext(PaymentContext);
+  const { installmentValue, installment, total, pixInfo, paymentSteps } = useContext(PaymentContext);
   return (
     <main className={styles.container}>
       <h2 className={styles.mainText}>
-        João, pague a entrada de {installmentValue} pelo Pix
+        {
+          paymentSteps == 0 && `João, pague a entrada de ${installmentValue} no pix`
+        }
+
+        {
+          paymentSteps > 0 && paymentSteps + 1 != installment?.quantity && `João, pague a ${paymentSteps + 1}ª parcela em 1x no cartão`
+        }
+
+        {
+          paymentSteps + 1 == installment?.quantity && installment.quantity != 1 && `João, pague o restante em 1x no cartão`
+        }
       </h2>
 
       <QrCode value={pixInfo.code} />
