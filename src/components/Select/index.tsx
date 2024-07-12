@@ -13,7 +13,7 @@ export function Select({ label }: SelectProps) {
       </label>
 
       <select name="select">
-        <option>1x de R$ 15.300,00</option>
+        <option value="1">1x de R$ 15.300,00</option>
       </select>
 
       <img
