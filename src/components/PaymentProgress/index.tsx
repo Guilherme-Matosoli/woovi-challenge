@@ -1,20 +1,25 @@
+import { useContext } from "react";
 import { PaymentStep } from "../PaymentStep";
 import styles from "./styles.module.css";
+import { PaymentContext } from "../../contexts/PaymentContext";
 
 export function PaymentProgress() {
+  const { paymentSteps, installment } = useContext(PaymentContext);
+
   return (
     <section className={styles.container}>
-      <PaymentStep
-        index={0}
-        installmentsQuantity={1}
-        installmentValue={1530000}
-        concluded
-      />
-      <PaymentStep
-        installmentValue={1530000}
-        index={1}
-        installmentsQuantity={1}
-      />
+      {
+        Array.from({ length: installment?.quantity || 0 }, (_, index) => {
+          return (
+            <PaymentStep
+              index={index}
+              installmentsQuantity={installment?.quantity || 0}
+              installmentValue={installment?.value || 0}
+              concluded={(index + 1) <= paymentSteps}
+            />
+          )
+        })
+      }
     </section>
   )
 }
