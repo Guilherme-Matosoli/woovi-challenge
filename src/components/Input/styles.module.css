@@ -2,7 +2,6 @@
   width: 100%;
 
   border-radius: 8px;
-
 }
 
 .input input {
@@ -17,6 +16,8 @@
 .input fieldset {
   border: 2px solid #e5e5e5;
   border-radius: 8px;
+
+  transition: all .3s;
 
   & legend span {
     display: none;
