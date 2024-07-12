@@ -16,6 +16,11 @@ interface PixInfo {
   expiresIn: Date
 };
 
+interface ClientInfo {
+  name: string,
+  cpf: string
+};
+
 interface PaymentContextProps {
   installment: Installment | undefined,
   setInstallment: Dispatch<SetStateAction<Installment | undefined>>,
@@ -27,7 +32,10 @@ interface PaymentContextProps {
   setPixInfo: Dispatch<SetStateAction<PixInfo>>,
 
   paymentSteps: number,
-  increaseInstallment: () => void
+  increaseInstallment: () => void,
+
+  clientInfo: ClientInfo,
+  setClientInfo: Dispatch<SetStateAction<ClientInfo>>
 };
 
 
@@ -39,6 +47,11 @@ export const PaymentContextProvider = ({ children }: PaymentContextProviderProps
     identifier: "2c1b951f356c4680b13ba1c9fc889c47",
     code: "JHGASJDGKJHGJUH3I2U4632847JKSHDFABI7Y6T342UYGJKDHSFAGVF87T34GHJVHJ",
     expiresIn: new Date()
+  });
+
+  const [clientInfo, setClientInfo] = useState<ClientInfo>({
+    name: "João",
+    cpf: "000.000.000-00"
   });
 
   const [paymentSteps, setPaymentSteps] = useState(1);
@@ -73,7 +86,10 @@ export const PaymentContextProvider = ({ children }: PaymentContextProviderProps
       setPixInfo,
 
       paymentSteps,
-      increaseInstallment
+      increaseInstallment,
+
+      clientInfo,
+      setClientInfo
     }}>
       {children}
     </PaymentContext.Provider>
