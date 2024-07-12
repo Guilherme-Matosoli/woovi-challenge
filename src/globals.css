@@ -10,10 +10,11 @@ body {
   justify-content: space-between;
 
   min-block-size: 100dvh;
+  width: min(100vw, 900px);
+  margin: 0 auto;
 
   padding: 36px 19px 27px;
 
   padding-top: 36px;
   padding-bottom: 27px;
-
 }
