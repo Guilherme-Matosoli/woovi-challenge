@@ -37,7 +37,7 @@ export default function Installments() {
     {
       installment: {
         quantity: 4,
-        value: 7725000
+        value: 772500
       },
       benefit: "-3% de juros: Melhor opção de parcelamento"
     },
