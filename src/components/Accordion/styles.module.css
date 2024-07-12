@@ -10,17 +10,17 @@
 
 .text {
   display: flex;
-  align-items: flex-start !important;
+  align-items: center !important;
   justify-content: space-between;
 
-  padding: 0 !important;
+  padding: 0 0 20px 0 !important;
 
   font-family: 'Nunito', sans-serif;
   font-weight: 800;
   font-size: 16px;
   color: #4D4D4D;
 
-  padding: 0;
+  min-height: 0 !important;
 }
 
 .text div {
@@ -35,5 +35,4 @@
   font-weight: 600;
   font-size: 16px;
   color: #4D4D4D;
-
 }
