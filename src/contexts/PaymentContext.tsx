@@ -14,7 +14,7 @@ interface PixInfo {
   identifier: string,
   code: string,
   expiresIn: Date
-}
+};
 
 interface PaymentContextProps {
   installment: Installment | undefined,
@@ -24,7 +24,10 @@ interface PaymentContextProps {
   installmentValue: string,
 
   pixInfo: PixInfo,
-  setPixInfo: Dispatch<SetStateAction<PixInfo>>
+  setPixInfo: Dispatch<SetStateAction<PixInfo>>,
+
+  paymentSteps: number,
+  increaseInstallment: () => void
 };
 
 
@@ -37,6 +40,12 @@ export const PaymentContextProvider = ({ children }: PaymentContextProviderProps
     code: "JHGASJDGKJHGJUH3I2U4632847JKSHDFABI7Y6T342UYGJKDHSFAGVF87T34GHJVHJ",
     expiresIn: new Date()
   });
+
+  const [paymentSteps, setPaymentSteps] = useState(0);
+
+  const increaseInstallment = () => {
+    setPaymentSteps(current => current + 1);
+  };
 
   const installmentValue = useMemo(() => {
     const valueDivided = installment?.value! / 100;
@@ -61,7 +70,10 @@ export const PaymentContextProvider = ({ children }: PaymentContextProviderProps
       installmentValue,
 
       pixInfo,
-      setPixInfo
+      setPixInfo,
+
+      paymentSteps,
+      increaseInstallment
     }}>
       {children}
     </PaymentContext.Provider>
