@@ -1,9 +1,10 @@
 import { InstallmentCard } from "../../components/InstallmentCard";
 import styles from "./styles.module.css";
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Button } from "../../components/Button";
 import { useNavigate } from "react-router-dom";
+import { PaymentContext } from "../../contexts/PaymentContext";
 
 interface Installment {
   quantity: number,
@@ -61,10 +62,13 @@ export default function Installments() {
   ]);
 
   const [optionSelected, setOptionSelected] = useState<Installment>();
+  const { setInstallment } = useContext(PaymentContext);
 
   const navigate = useNavigate();
   function chooseInstallment() {
     if (!optionSelected) return;
+
+    setInstallment(optionSelected);
 
     navigate("/payment/pay")
   };
