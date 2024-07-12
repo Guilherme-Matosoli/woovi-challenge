@@ -10,12 +10,14 @@ export function PaymentProgress() {
     <section className={styles.container}>
       {
         Array.from({ length: installment?.quantity || 0 }, (_, index) => {
+          const installmentNumber = index + 1;
+
           return (
             <PaymentStep
-              index={index}
+              installmentNumber={installmentNumber}
               installmentsQuantity={installment?.quantity || 0}
               installmentValue={installment?.value || 0}
-              concluded={(index + 1) <= paymentSteps}
+              concluded={installmentNumber <= paymentSteps}
             />
           )
         })
