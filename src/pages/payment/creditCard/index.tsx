@@ -5,7 +5,11 @@ import { Input } from "../../../components/Input";
 import { Select } from "../../../components/Select";
 
 import { useMask } from "@react-input/mask";
-import { useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
+import { z, ZodError } from "zod";
+import { luhnAlgorithm } from "../../../utils/luhnAlgorithm";
+import { validateExpiryDate } from "../../../utils/validateExpiryDate";
+import { validateCpf } from "../../../utils/validateCpf";
 
 interface FormInfos {
   name: string,
@@ -15,6 +19,35 @@ interface FormInfos {
   cardCvv: string,
   installments: string
 };
+
+const schema = z.object({
+  name: z
+    .string()
+    .min(5, "Nome inválido")
+    .regex(/^[A-Za-z\s]+$/, "Nome inválido"),
+
+  cpf: z
+    .string()
+    .min(14, "CPF inválido")
+    .regex(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/, "CPF inválido")
+    .refine(validateCpf, "CPF inválido"),
+
+  cardNumber: z
+    .string()
+    .min(19, "Cartão inválido")
+    .regex(/^\d{4}-\d{4}-\d{4}-\d{4}$/, "Cartão inválido")
+    .refine(luhnAlgorithm, "Cartão inválido"),
+
+  cardValidate: z
+    .string()
+    .min(4, "Formato de data inválido (MM/AA)")
+    .regex(/^(0[1-9]|1[0-2])\/\d{2}$/, "Formato de data inválido (MM/AA)")
+    .refine(validateExpiryDate, "Data inválida"),
+
+  cardCvv: z
+    .string()
+    .min(3, "Cvv inválido")
+})
 
 
 export function CreditCard() {
@@ -32,6 +65,24 @@ export function CreditCard() {
     installments: '1'
   });
 
+  const [error, setError] = useState<any>()
+
+  const validateFields = (name: keyof Omit<FormInfos, "installments">) => {
+    try {
+      const fieldToValidate: { [K in keyof Omit<FormInfos, "installments">]?: true } = { [name]: true };
+      schema.pick(fieldToValidate).parse({ [name]: formInfos[name] });
+
+      console.log("válido")
+      setError(null)
+    }
+    catch (err) {
+      if (err instanceof ZodError) {
+        console.log(err.errors[0])
+        setError(err.errors[0])
+      }
+    }
+  };
+
   const setInfos = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
 
@@ -41,8 +92,22 @@ export function CreditCard() {
     }));
   };
 
+  useEffect(() => {
+    Object.keys(formInfos).map(key => {
+      const rKey = key as keyof FormInfos;
+      if (rKey == "installments") return;
+
+      if (formInfos[rKey].length > 1) validateFields(rKey);
+    })
+  }, [formInfos]);
+
+  async function handleSubmit(e: FormEvent) {
+    e.preventDefault();
+  };
+
   return (
-    <form className={styles.container}>
+    <form className={styles.container} onSubmit={handleSubmit}>
+      {JSON.stringify(error)}
       <Input
         required
         label="Nome completo"
@@ -73,7 +138,7 @@ export function CreditCard() {
       <section className={styles.inputWrapper}>
         <Input
           required
-          label="Vencimento (MM/YY)"
+          label={"Vencimento (MM/YY)"}
           name="cardValidate"
           inputRef={ccValidateMask}
 
