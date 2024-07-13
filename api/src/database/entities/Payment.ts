@@ -2,6 +2,10 @@ import mongoose, { Schema } from "mongoose";
 
 const Payment = new Schema({
   id: String,
+  pixInfo: {
+    code: String,
+    identifier: String
+  },
   installment: {
     quantity: Number,
     value: Number
