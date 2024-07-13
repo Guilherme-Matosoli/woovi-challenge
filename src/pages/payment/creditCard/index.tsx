@@ -65,22 +65,34 @@ export function CreditCard() {
     installments: '1'
   });
 
-  const [error, setError] = useState<any>()
+  const [error, setError] = useState<Partial<Record<keyof Omit<FormInfos, "installments">, string>>>({
+    name: undefined,
+    cpf: undefined,
+    cardNumber: undefined,
+    cardValidate: undefined,
+    cardCvv: undefined
+  });
 
   const validateFields = (name: keyof Pick<FormInfos, "cardNumber" | "cpf">) => {
     try {
       const fieldToValidate: { [K in keyof Omit<FormInfos, "installments">]?: true } = { [name]: true };
       schema.pick(fieldToValidate).parse({ [name]: formInfos[name] });
 
-      console.log("válido")
-      setError(null)
+      setError((current) => ({
+        ...current,
+        [name]: undefined
+      }));
     }
     catch (err) {
       if (err instanceof ZodError) {
-        console.log(err.errors[0])
-        setError(err.errors[0])
-      }
-    }
+        setError((current) => (
+          {
+            ...current,
+            [name]: err.errors[0].message
+          }
+        ));
+      };
+    };
   };
 
   const setInfos = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
