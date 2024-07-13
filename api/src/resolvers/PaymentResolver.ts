@@ -57,9 +57,14 @@ export class PaymentResolver {
   ) {
 
     try {
-      const newPayment = await Payment.findOneAndUpdate({ id }, {
-        $inc: { steps: 1 }
-      });
+      const oldPayment = await Payment.findOne({ id });
+      const handleSteps = () => {
+        if (oldPayment.steps == oldPayment.installment.quantity) return { concluded: true };
+
+        return { steps: oldPayment.steps + 1 }
+      };
+
+      const newPayment = await Payment.findOneAndUpdate({ id }, handleSteps());
 
       return newPayment;
     }
