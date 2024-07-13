@@ -9,6 +9,8 @@ import { databaseConnection } from "./database/databaseConnection";
 import { Server } from "socket.io";
 
 
+export const io = new Server();
+
 async function initialize() {
   await databaseConnection
   console.log("DATABASE CONNECT SUCCESS")
@@ -23,8 +25,6 @@ async function initialize() {
   const server = new ApolloServer({
     schema
   });
-
-  const io = new Server();
 
   io.listen(4001);
   const { url } = await server.listen("4000");
