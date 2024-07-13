@@ -67,7 +67,7 @@ export function CreditCard() {
 
   const [error, setError] = useState<any>()
 
-  const validateFields = (name: keyof Omit<FormInfos, "installments">) => {
+  const validateFields = (name: keyof Pick<FormInfos, "cardNumber" | "cpf">) => {
     try {
       const fieldToValidate: { [K in keyof Omit<FormInfos, "installments">]?: true } = { [name]: true };
       schema.pick(fieldToValidate).parse({ [name]: formInfos[name] });
@@ -95,7 +95,7 @@ export function CreditCard() {
   useEffect(() => {
     Object.keys(formInfos).map(key => {
       const rKey = key as keyof FormInfos;
-      if (rKey == "installments") return;
+      if (rKey != "cpf" && rKey != "cardNumber") return;
 
       if (formInfos[rKey].length > 1) validateFields(rKey);
     })
@@ -107,7 +107,6 @@ export function CreditCard() {
 
   return (
     <form className={styles.container} onSubmit={handleSubmit}>
-      {JSON.stringify(error)}
       <Input
         required
         label="Nome completo"
