@@ -12,10 +12,10 @@ export class PixResolver {
 
     try {
       const { pixInfo } = await Payment.findOne({ id });
-      return pixInfo
+      return pixInfo;
     }
     catch (err) {
       console.log(err);
     };
-  }
+  };
 };

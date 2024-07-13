@@ -47,6 +47,24 @@ export class PaymentResolver {
       concluded: false
     });
 
-    return payment
+    return payment;
   };
+
+  @Mutation(() => PaymentModel)
+  async simulatePayment(
+    @Arg("id")
+    id: string
+  ) {
+
+    try {
+      const newPayment = await Payment.findOneAndUpdate({ id }, {
+        $inc: { steps: 1 }
+      });
+
+      return newPayment;
+    }
+    catch (err) {
+      console.log(err);
+    };
+  }
 };
