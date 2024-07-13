@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AccordionUsage } from "../../components/Accordion";
 import { Deadline } from "../../components/Deadline";
 import { PaymentProgress } from "../../components/PaymentProgress";
@@ -6,6 +6,7 @@ import styles from "./styles.module.css";
 import { PaymentContext } from "../../contexts/PaymentContext";
 import { Pix } from "./pix";
 import { CreditCard } from "./creditCard";
+import { useNavigate } from "react-router-dom";
 
 export default function Payment() {
   const {
@@ -15,6 +16,11 @@ export default function Payment() {
     pixInfo,
     paymentSteps,
     clientInfo } = useContext(PaymentContext);
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!installment) navigate('/payment/installments');
+  }, []);
 
   return (
     <main className={styles.container}>
