@@ -1,3 +1,11 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+
+  width: 100%;
+}
+
 .input {
   width: 100%;
 
@@ -37,4 +45,14 @@
   & span {
     display: none;
   }
+}
+
+.error {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+
+  color: red;
+
+  padding-left: 20px;
 }
