@@ -14,6 +14,8 @@ export function PaymentProgress() {
 
           return (
             <PaymentStep
+              key={installmentNumber}
+
               installmentNumber={installmentNumber}
               installmentsQuantity={installment?.quantity || 0}
               installmentValue={installment?.value || 0}
