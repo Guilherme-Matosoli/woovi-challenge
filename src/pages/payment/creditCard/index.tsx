@@ -85,12 +85,11 @@ export function CreditCard() {
     }
     catch (err) {
       if (err instanceof ZodError) {
-        setErrors((current) => (
-          {
-            ...current,
-            [name]: err.errors[0].message
-          }
-        ));
+        setErrors((current) => ({
+          ...current,
+          [name]: err.errors[0].message
+        }));
+
       };
     };
   };
@@ -101,6 +100,11 @@ export function CreditCard() {
     setFormInfos((current: FormInfos) => ({
       ...current,
       [name]: value || ''
+    }));
+
+    setErrors(current => ({
+      ...current,
+      [name]: undefined
     }));
   };
 
@@ -115,6 +119,21 @@ export function CreditCard() {
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
+
+    try {
+      const data = schema.parse(formInfos);
+      console.log(data)
+    }
+    catch (err) {
+      if (err instanceof ZodError) {
+        err.errors.forEach((error) => {
+          setErrors(current => ({
+            ...current,
+            [error.path[0]]: error.message
+          }))
+        });
+      };
+    };
   };
 
   return (
