@@ -35,7 +35,7 @@ const schema = z.object({
   cardNumber: z
     .string()
     .min(19, "Cartão inválido")
-    .regex(/^\d{4}-\d{4}-\d{4}-\d{4}$/, "Cartão inválido")
+    .regex(/^\d{4} \d{4} \d{4} \d{4}$/, "Cartão inválido")
     .refine(luhnAlgorithm, "Cartão inválido"),
 
   cardValidate: z
@@ -65,7 +65,7 @@ export function CreditCard() {
     installments: '1'
   });
 
-  const [error, setError] = useState<Partial<Record<keyof Omit<FormInfos, "installments">, string>>>({
+  const [errors, setErrors] = useState<Partial<Record<keyof Omit<FormInfos, "installments">, string>>>({
     name: undefined,
     cpf: undefined,
     cardNumber: undefined,
@@ -78,14 +78,14 @@ export function CreditCard() {
       const fieldToValidate: { [K in keyof Omit<FormInfos, "installments">]?: true } = { [name]: true };
       schema.pick(fieldToValidate).parse({ [name]: formInfos[name] });
 
-      setError((current) => ({
+      setErrors((current) => ({
         ...current,
         [name]: undefined
       }));
     }
     catch (err) {
       if (err instanceof ZodError) {
-        setError((current) => (
+        setErrors((current) => (
           {
             ...current,
             [name]: err.errors[0].message
@@ -126,6 +126,8 @@ export function CreditCard() {
 
         value={formInfos.name}
         onChange={setInfos}
+
+        errorMessage={errors.name}
       />
       <Input
         required
@@ -135,6 +137,8 @@ export function CreditCard() {
 
         value={formInfos.cpf}
         onChange={setInfos}
+
+        errorMessage={errors.cpf}
       />
       <Input
         required
@@ -144,6 +148,8 @@ export function CreditCard() {
 
         value={formInfos.cardNumber}
         onChange={setInfos}
+
+        errorMessage={errors.cardNumber}
       />
 
       <section className={styles.inputWrapper}>
@@ -155,6 +161,9 @@ export function CreditCard() {
 
           value={formInfos.cardValidate}
           onChange={setInfos}
+
+
+          errorMessage={errors.cardValidate}
         />
 
         <Input
@@ -165,6 +174,8 @@ export function CreditCard() {
 
           value={formInfos.cardCvv}
           onChange={setInfos}
+
+          errorMessage={errors.cardCvv}
         />
       </section>
 
