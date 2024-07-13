@@ -6,6 +6,7 @@ import path from "path";
 import { buildSchema } from "type-graphql";
 import { PaymentResolver } from "./resolvers/PaymentResolver";
 import { databaseConnection } from "./database/databaseConnection";
+import { Server } from "socket.io";
 
 
 async function initialize() {
@@ -23,7 +24,9 @@ async function initialize() {
     schema
   });
 
+  const io = new Server();
 
+  io.listen(4001);
   const { url } = await server.listen("4000");
   console.log(`Server running on ${url}`)
 };
