@@ -4,7 +4,8 @@ const Payment = new Schema({
   id: String,
   pixInfo: {
     code: String,
-    identifier: String
+    identifier: String,
+    value: Number
   },
   installment: {
     quantity: Number,
