@@ -1,7 +1,7 @@
 import { InstallmentCard } from "../../components/InstallmentCard";
 import styles from "./styles.module.css";
 
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Button } from "../../components/Button";
 import { useNavigate } from "react-router-dom";
 import { PaymentContext } from "../../contexts/PaymentContext";
@@ -62,7 +62,7 @@ export default function Installments() {
   ]);
 
   const [optionSelected, setOptionSelected] = useState<Installment>();
-  const { setInstallment } = useContext(PaymentContext);
+  const { setInstallment, clientInfo } = useContext(PaymentContext);
 
   const navigate = useNavigate();
   function chooseInstallment() {
@@ -73,10 +73,14 @@ export default function Installments() {
     navigate("/payment/pay")
   };
 
+  useEffect(() => {
+    if (!clientInfo) navigate('/');
+  }, []);
+
   return (
     <main className={styles.container}>
       <h2 className={styles.mainText}>
-        João, como você quer pagar?
+        {clientInfo?.name.split(" ")[0]}, como você quer pagar?
       </h2>
 
       <Button
