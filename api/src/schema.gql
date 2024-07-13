@@ -3,6 +3,43 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
+type Client {
+  cpf: String!
+  name: String!
+}
+
+type Installment {
+  quantity: Int!
+  value: Int!
+}
+
+type Mutation {
+  createPayment(input: PaymentInput!): PaymentModel!
+  simulatePayment(id: String!): PaymentModel!
+}
+
+input PaymentInput {
+  cpf: String!
+  name: String!
+  quantity: Int!
+  value: Int!
+}
+
+type PaymentModel {
+  client: Client!
+  concluded: Boolean!
+  id: String!
+  installment: Installment!
+  pixInfo: PixInfo!
+  steps: Int!
+}
+
+type PixInfo {
+  code: String!
+  identifier: String!
+  value: Int!
+}
+
 type Query {
-  payment: String!
+  payment(id: String!): PaymentModel
 }
