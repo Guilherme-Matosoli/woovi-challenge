@@ -34,8 +34,8 @@ interface PaymentContextProps {
   paymentSteps: number,
   increaseInstallment: () => void,
 
-  clientInfo: ClientInfo,
-  setClientInfo: Dispatch<SetStateAction<ClientInfo>>
+  clientInfo: ClientInfo | undefined,
+  setClientInfo: Dispatch<SetStateAction<ClientInfo | undefined>>
 };
 
 
@@ -49,10 +49,7 @@ export const PaymentContextProvider = ({ children }: PaymentContextProviderProps
     expiresIn: new Date()
   });
 
-  const [clientInfo, setClientInfo] = useState<ClientInfo>({
-    name: "João",
-    cpf: "000.000.000-00"
-  });
+  const [clientInfo, setClientInfo] = useState<ClientInfo>();
 
   const [paymentSteps, setPaymentSteps] = useState(1);
 
