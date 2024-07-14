@@ -99,7 +99,7 @@ export default function Payment() {
           concluded && `${clientFirstName}, parabéns! Você concluiu todo o pagamento!`
         }
         {
-          !concluded && paymentSteps == 1 && installment?.quantity == 1 && `${clientFirstName}, pague o valor de ${installmentValue} no pix`
+          !concluded && paymentSteps == 1 && installment?.quantity == 1 && !paymentExpired && `${clientFirstName}, pague o valor de ${installmentValue} no pix`
         }
 
         {
