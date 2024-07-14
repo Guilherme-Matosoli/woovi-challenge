@@ -13,6 +13,7 @@ import { validateCpf } from "../../../utils/validateCpf";
 import { gql, useMutation } from "@apollo/client";
 import { Success } from "../../../components/Success";
 import { useParams } from "react-router-dom";
+import { LoadingIcon } from "../../../components/LoadingIcon";
 
 interface FormInfos {
   name: string,
@@ -24,10 +25,8 @@ interface FormInfos {
 };
 
 const SIMULATE_CARD = gql`
-mutation ($name: String!, $cpf: String!, $cardNumber: String!, $cardValidate: String!, $cardCvv: String!, $installments: String!){
-  simulateCreditCard(input: { name: $name, cpf: $cpf, cardNumber: $cardNumber, cardValidate: $cardValidate, cardCvv: $cardCvv, installments: $installments }){
-      name
-    }
+mutation ($id: String!){
+  simulateCreditCard(id: $id)
   }
 `;
 
@@ -35,7 +34,7 @@ const schema = z.object({
   name: z
     .string()
     .min(5, "Nome inválido")
-    .regex(/^[A-Za-z\s]+$/, "Nome inválido"),
+    .regex(/^[\p{L}\p{M}\s]+$/u, "Nome inválido"),
 
   cpf: z
     .string()
@@ -131,16 +130,16 @@ export function CreditCard() {
 
   const [success, setSucces] = useState(false);
 
-  const [simulate] = useMutation(SIMULATE_CARD);
+  const [simulate, { error, loading }] = useMutation(SIMULATE_CARD);
+  if (error) console.log(JSON.stringify(error))
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
 
     try {
-      const data = schema.parse(formInfos);
+      schema.parse(formInfos);
       await simulate({
         variables: {
-          data,
           id: paymentId
         },
         onCompleted: () => {
@@ -233,9 +232,10 @@ export function CreditCard() {
       />
 
       <Button
-        text="Pagar"
         type="submit"
-      />
+      >
+        {loading ? <LoadingIcon /> : "Pagar"}
+      </Button>
     </form>
   )
 }
