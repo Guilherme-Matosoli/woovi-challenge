@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AccordionUsage } from "../../components/Accordion";
 import { Deadline } from "../../components/Deadline";
 import { PaymentProgress } from "../../components/PaymentProgress";
@@ -12,6 +12,7 @@ import { gql, useQuery } from "@apollo/client";
 import { LoadingIcon } from "../../components/LoadingIcon";
 import { isExpired } from "../../utils/isExpired";
 import { Expired } from "./expired";
+import { Success } from "../../components/Success";
 
 const GET_PAYMENT = gql`
   query($id: String!){
@@ -56,7 +57,6 @@ export default function Payment() {
       id: paymentId
     },
     onCompleted: data => {
-      console.log(data)
       setPixInfo(data.payment.pixInfo);
       setClientInfo(data.payment.client);
       setInstallment(data.payment.installment);
@@ -64,18 +64,28 @@ export default function Payment() {
     }
   });
 
+  const [paymentSuccess, setPaymentSuccess] = useState(false);
+
   const navigate = useNavigate();
   useEffect(() => {
-    if (!installment) navigate('/payment/installments');
+    if (!paymentId) navigate('/');
 
     socket.emit("join", paymentId);
+    socket.on("payment", () => {
+      setPaymentSuccess(true);
+
+      setInterval(() => {
+        window.location.reload();
+      }, 2000);
+    });
   }, []);
 
   const clientFirstName = clientInfo?.name.split(" ")[0];
   const paymentExpired = isExpired(pixInfo?.expiresIn!) && paymentSteps == 1;
 
-  return !loading && (
+  return !loading && clientInfo && (
     <main className={styles.container}>
+      {paymentSuccess && <Success />}
       {loading && <LoadingIcon />}
 
       <h2 className={styles.mainText}>
