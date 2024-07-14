@@ -11,5 +11,5 @@ export class InstallmentModel {
   mainTitle?: string
 
   @Field(() => String, { nullable: true })
-  benefits?: string
+  benefit?: string
 }
