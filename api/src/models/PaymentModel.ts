@@ -2,7 +2,7 @@ import { GraphQLBoolean } from "graphql";
 import { Field, GraphQLISODateTime, Int, ObjectType } from "type-graphql";
 
 @ObjectType()
-class Installment {
+export class Installment {
   @Field(() => Int)
   quantity: number
 
