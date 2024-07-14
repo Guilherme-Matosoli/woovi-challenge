@@ -74,4 +74,33 @@ export class PaymentResolver {
       console.log(err);
     };
   }
+
+  @Mutation(() => String!)
+  async simulateCreditCard(
+    @Arg("id")
+    id: string
+  ) {
+
+    try {
+      const oldPayment = await Payment.findOne({ id });
+      const handleSteps = () => {
+        if (oldPayment.steps == oldPayment.installment.quantity) return { concluded: true, steps: oldPayment.steps + 1 };
+
+        return { steps: oldPayment.steps + 1 }
+      };
+
+      await Payment.findOneAndUpdate({ id }, handleSteps());
+
+      await new Promise(resolve => {
+        setTimeout((e) => {
+          resolve(e)
+        }, 2000)
+      });
+
+      return "ok"
+    }
+    catch (err) {
+      console.log(err)
+    }
+  }
 };

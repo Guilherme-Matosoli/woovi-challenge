@@ -26,6 +26,7 @@ type InstallmentModel {
 
 type Mutation {
   createPayment(input: PaymentInput!): PaymentModel!
+  simulateCreditCard(id: String!): String!
   simulatePayment(id: String!): PaymentModel!
 }
 
