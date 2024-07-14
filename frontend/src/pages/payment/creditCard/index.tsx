@@ -5,7 +5,7 @@ import { Input } from "../../../components/Input";
 import { Select } from "../../../components/Select";
 
 import { useMask } from "@react-input/mask";
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useContext, useEffect, useState } from "react";
 import { z, ZodError } from "zod";
 import { luhnAlgorithm } from "../../../utils/luhnAlgorithm";
 import { validateExpiryDate } from "../../../utils/validateExpiryDate";
@@ -14,6 +14,7 @@ import { gql, useMutation } from "@apollo/client";
 import { Success } from "../../../components/Success";
 import { useParams } from "react-router-dom";
 import { LoadingIcon } from "../../../components/LoadingIcon";
+import { PaymentContext } from "../../../contexts/PaymentContext";
 
 interface FormInfos {
   name: string,
@@ -61,6 +62,7 @@ const schema = z.object({
 
 export function CreditCard() {
   const { paymentId } = useParams();
+  const { clientInfo } = useContext(PaymentContext);
 
   const cpfMask = useMask({ mask: '___.___.___-__', replacement: { _: /\d/ } });
   const ccNumberMask = useMask({ mask: '____ ____ ____ ____', replacement: { _: /\d/ } });
@@ -75,6 +77,16 @@ export function CreditCard() {
     cardCvv: '',
     installments: '1'
   });
+
+  useEffect(() => {
+    if (clientInfo) {
+      setFormInfos(current => ({
+        ...current,
+        name: clientInfo?.name,
+        cpf: clientInfo?.cpf
+      }));
+    };
+  }, []);
 
   const [errors, setErrors] = useState<Partial<Record<keyof Omit<FormInfos, "installments">, string>>>({
     name: undefined,
