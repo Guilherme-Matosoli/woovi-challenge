@@ -13,12 +13,12 @@ export function Pix() {
 
   return (
     <div className={styles.container}>
-      <QrCode value={pixInfo.code} />
+      <QrCode value={pixInfo?.code!} />
 
       <div className={styles.buttonWrapper}>
         <Button
           onClick={() => {
-            copyToClipboard(pixInfo.code);
+            copyToClipboard(pixInfo?.code!);
             setCopied(true);
 
             setTimeout(() => {
