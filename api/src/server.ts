@@ -6,6 +6,7 @@ import path from "path";
 import { buildSchema } from "type-graphql";
 import { PaymentResolver } from "./resolvers/PaymentResolver";
 import { databaseConnection } from "./database/databaseConnection";
+import { InstallmentResolver } from "./resolvers/InstallmentResolver";
 import { Server } from "socket.io";
 
 
@@ -19,7 +20,8 @@ async function initialize() {
 
   const schema = await buildSchema({
     resolvers: [
-      PaymentResolver
+      PaymentResolver,
+      InstallmentResolver
     ],
     emitSchemaFile: path.resolve(__dirname, "schema.gql")
   });
@@ -34,4 +36,4 @@ async function initialize() {
 };
 
 initialize();
-import "./listeners/websocket";
+import "./listeners/websocket"; 

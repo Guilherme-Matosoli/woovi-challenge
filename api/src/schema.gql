@@ -18,6 +18,12 @@ type Installment {
   value: Int!
 }
 
+type InstallmentModel {
+  benefits: String
+  installment: Installment!
+  mainTitle: String
+}
+
 type Mutation {
   createPayment(input: PaymentInput!): PaymentModel!
   simulatePayment(id: String!): PaymentModel!
@@ -46,5 +52,6 @@ type PixInfo {
 }
 
 type Query {
+  installment: [InstallmentModel!]!
   payment(id: String!): PaymentModel
 }
