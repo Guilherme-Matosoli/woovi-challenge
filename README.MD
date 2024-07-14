@@ -28,6 +28,8 @@
 #### O protótipo apresenta que o cliente poderia pagar a segunda parcela no cartão e que a entrada é no pix. Com base nisso, tomei a decisão de padrozinar o primeiro pagamento como pix SEMPRE e os demais no cartão. 
 
 #### O tratamento de valores foi feito com números inteiros multiplicando os valores por 100. Ao exibir os valores em tela, eles são divididos por 100 e formatados em BRL pela função responsável
+
+#### Resolvi colocar máscara nos inputs de CPF, cartão e data de validade para melhor retorno visual do client. Os inputs de CPF e cartão de crédito são validados por meio de cálculos (Algorítmo de Luhn para o cartão de crédito).
 ---
 
 ## Layout principal
