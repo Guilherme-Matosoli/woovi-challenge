@@ -10,6 +10,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { socket } from "../../services/websocket";
 import { gql, useQuery } from "@apollo/client";
 import { LoadingIcon } from "../../components/LoadingIcon";
+import { isExpired } from "../../utils/isExpired";
+import { Expired } from "./expired";
 
 const GET_PAYMENT = gql`
   query($id: String!){
@@ -70,10 +72,12 @@ export default function Payment() {
   }, []);
 
   const clientFirstName = clientInfo?.name.split(" ")[0];
+  const paymentExpired = isExpired(pixInfo?.expiresIn!) && paymentSteps == 1;
 
   return !loading && (
     <main className={styles.container}>
       {loading && <LoadingIcon />}
+
       <h2 className={styles.mainText}>
         {
           paymentSteps == 1 && installment?.quantity == 1 && `${clientFirstName}, pague o valor de ${installmentValue} no pix`
@@ -93,7 +97,11 @@ export default function Payment() {
       </h2>
 
       {
-        paymentSteps == 1 ? <Pix /> : <CreditCard />
+        paymentExpired && <Expired />
+      }
+
+      {
+        paymentSteps == 1 && !paymentExpired ? <Pix /> : <CreditCard />
       }
 
       <Deadline
