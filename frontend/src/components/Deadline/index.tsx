@@ -7,7 +7,7 @@ interface DeadlineProps {
 export function Deadline({ time }: DeadlineProps) {
   const date = new Date(time);
   const month = String(date.getMonth()).length == 1 ? "0" + date.getMonth() : date.getMonth();
-  const day = String(date.getDay()).length == 1 ? "0" + date.getDay() : date.getDay();
+  const day = String(date.getDate()).length == 1 ? "0" + date.getDate() : date.getDate();
 
   const formatedDate = `${day}/${month}/${date.getFullYear()} - ${date.getHours()}:${date.getMinutes()}`
 
