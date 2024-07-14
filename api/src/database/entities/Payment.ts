@@ -5,7 +5,7 @@ const Payment = new Schema({
   pixInfo: {
     code: String,
     identifier: String,
-    value: Number
+    expiresIn: Date
   },
   installment: {
     quantity: Number,
