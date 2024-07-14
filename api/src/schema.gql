@@ -19,7 +19,7 @@ type Installment {
 }
 
 type InstallmentModel {
-  benefits: String
+  benefit: String
   installment: Installment!
   mainTitle: String
 }
