@@ -1,10 +1,11 @@
 import styles from "./styles.module.css";
 
 interface DeadlineProps {
-  time: Date
+  time: Date | undefined
 }
 
 export function Deadline({ time }: DeadlineProps) {
+  if (!time) return;
   const date = new Date(time);
   const month = String(date.getMonth()).length == 1 ? "0" + date.getMonth() : date.getMonth();
   const day = String(date.getDate()).length == 1 ? "0" + date.getDate() : date.getDate();
