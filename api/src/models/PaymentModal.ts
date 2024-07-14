@@ -1,5 +1,5 @@
 import { GraphQLBoolean } from "graphql";
-import { Field, Int, ObjectType } from "type-graphql";
+import { Field, GraphQLISODateTime, Int, ObjectType } from "type-graphql";
 
 @ObjectType()
 class Installment {
@@ -27,8 +27,8 @@ export class PixInfo {
   @Field()
   identifier: string
 
-  @Field(() => Int)
-  value: number
+  @Field(() => GraphQLISODateTime)
+  expiresIn: Date
 };
 
 @ObjectType()
