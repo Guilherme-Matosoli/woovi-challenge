@@ -5,9 +5,22 @@ import { FormEvent, useContext, useEffect, useState } from "react";
 import { Button } from "../../components/Button";
 import { useNavigate } from "react-router-dom";
 import { PaymentContext } from "../../contexts/PaymentContext";
-import { gql, useMutation } from "@apollo/client";
+import { gql, useMutation, useQuery } from "@apollo/client";
 import { LoadingIcon } from "../../components/LoadingIcon";
 
+
+const GET_INSTALLMENTS = gql`
+  query{
+    installment{
+      benefits
+      mainTitle
+      installment {
+        quantity
+        value
+      }
+    }
+  }
+`;
 
 const CREATE_PAYMENT = gql`
   mutation($name: String!, $cpf: String!, $quantity: Int!, $value: Int!){
@@ -24,55 +37,17 @@ const CREATE_PAYMENT = gql`
   }
 `;
 
+interface OptionsInstallment {
+  installment: {
+    quantity: number,
+    value: number,
+  },
+  mainTitle?: string,
+  benefit?: string
+}
+
 export default function Installments() {
-  const [options, _] = useState([
-    {
-      installment: {
-        quantity: 1,
-        value: 3050000
-      },
-      mainTitle: "Pix",
-      benefit: "🤑 R$ 300,00 de volta no seu Pix na hora"
-    },
-    {
-      installment: {
-        quantity: 2,
-        value: 1530000
-      },
-      mainTitle: "Pix parcelado"
-    },
-    {
-      installment: {
-        quantity: 3,
-        value: 1019666
-      }
-    },
-    {
-      installment: {
-        quantity: 4,
-        value: 772500
-      },
-      benefit: "-3% de juros: Melhor opção de parcelamento"
-    },
-    {
-      installment: {
-        quantity: 5,
-        value: 630000
-      }
-    },
-    {
-      installment: {
-        quantity: 6,
-        value: 528333
-      }
-    },
-    {
-      installment: {
-        quantity: 7,
-        value: 454285
-      }
-    }
-  ]);
+  const [options, setOptions] = useState<OptionsInstallment[]>();
 
   const {
     setPaymentId,
@@ -88,6 +63,14 @@ export default function Installments() {
   useEffect(() => {
     if (!clientInfo) navigate('/');
   }, []);
+
+  const getInstallments = useQuery(GET_INSTALLMENTS, {
+    onCompleted: data => {
+      setOptions(data.installment)
+    }
+  });
+
+  if (getInstallments.error) console.log(JSON.stringify(getInstallments.error))
 
 
   const [createPayment, { loading, error }] = useMutation(CREATE_PAYMENT);
@@ -115,7 +98,7 @@ export default function Installments() {
     });
   };
 
-  return (
+  return options && (
     <main className={styles.container}>
       <h2 className={styles.mainText}>
         {clientInfo?.name.split(" ")[0]}, como você quer pagar?
