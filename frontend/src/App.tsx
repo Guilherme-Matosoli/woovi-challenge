@@ -3,6 +3,7 @@ import Installments from "./pages/installments/"
 import RootLayout from "./layout";
 import Payment from "./pages/payment";
 import Home from "./pages/home";
+import { Simulation } from "./pages/simulation";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path="/payment/installments" element={<Installments />} />
           <Route path="/payment/pay/:paymentId" element={<Payment />} />
+          <Route path="/simulation/:paymentId" element={<Simulation />} />
         </Route>
       </Routes>
     </Router>
