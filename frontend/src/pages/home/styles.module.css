@@ -4,7 +4,22 @@
   align-items: center;
   justify-content: center;
   flex: 1;
+  gap: 28px;
 }
+
+.mainText {
+  width: 100%;
+  padding: 0 20px;
+
+  text-wrap: wrap;
+  text-align: center;
+
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 24px;
+  color: #4D4D4D;
+}
+
 
 .form {
   display: flex;
