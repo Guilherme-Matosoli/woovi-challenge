@@ -12,7 +12,7 @@ import { LoadingIcon } from "../../components/LoadingIcon";
 const GET_INSTALLMENTS = gql`
   query{
     installment{
-      benefits
+      benefit
       mainTitle
       installment {
         quantity
@@ -64,19 +64,13 @@ export default function Installments() {
     if (!clientInfo) navigate('/');
   }, []);
 
-  const getInstallments = useQuery(GET_INSTALLMENTS, {
+  useQuery(GET_INSTALLMENTS, {
     onCompleted: data => {
       setOptions(data.installment)
     }
   });
 
-  if (getInstallments.error) console.log(JSON.stringify(getInstallments.error))
-
-
-  const [createPayment, { loading, error }] = useMutation(CREATE_PAYMENT);
-  if (error) {
-    console.log(JSON.stringify(error))
-  };
+  const [createPayment, { loading }] = useMutation(CREATE_PAYMENT);
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
