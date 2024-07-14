@@ -9,7 +9,9 @@ import { databaseConnection } from "./database/databaseConnection";
 import { Server } from "socket.io";
 
 
-export const io = new Server();
+export const io = new Server({
+  cors: { "origin": "*" }
+});
 
 async function initialize() {
   await databaseConnection
@@ -32,3 +34,4 @@ async function initialize() {
 };
 
 initialize();
+import "./listeners/websocket";
