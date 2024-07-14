@@ -10,6 +10,9 @@ import { z, ZodError } from "zod";
 import { luhnAlgorithm } from "../../../utils/luhnAlgorithm";
 import { validateExpiryDate } from "../../../utils/validateExpiryDate";
 import { validateCpf } from "../../../utils/validateCpf";
+import { gql, useMutation } from "@apollo/client";
+import { Success } from "../../../components/Success";
+import { useParams } from "react-router-dom";
 
 interface FormInfos {
   name: string,
@@ -19,6 +22,14 @@ interface FormInfos {
   cardCvv: string,
   installments: string
 };
+
+const SIMULATE_CARD = gql`
+mutation ($name: String!, $cpf: String!, $cardNumber: String!, $cardValidate: String!, $cardCvv: String!, $installments: String!){
+  simulateCreditCard(input: { name: $name, cpf: $cpf, cardNumber: $cardNumber, cardValidate: $cardValidate, cardCvv: $cardCvv, installments: $installments }){
+      name
+    }
+  }
+`;
 
 const schema = z.object({
   name: z
@@ -47,10 +58,11 @@ const schema = z.object({
   cardCvv: z
     .string()
     .min(3, "Cvv inválido")
-})
-
+});
 
 export function CreditCard() {
+  const { paymentId } = useParams();
+
   const cpfMask = useMask({ mask: '___.___.___-__', replacement: { _: /\d/ } });
   const ccNumberMask = useMask({ mask: '____ ____ ____ ____', replacement: { _: /\d/ } });
   const ccValidateMask = useMask({ mask: '__/__', replacement: { _: /\d/ } });
@@ -83,14 +95,14 @@ export function CreditCard() {
         [name]: undefined
       }));
     }
-    catch (err) {
-      if (err instanceof ZodError) {
-        setErrors((current) => ({
+    catch (error) {
+      if (error instanceof ZodError) {
+        const err = error as ZodError;
+        setErrors(current => ({
           ...current,
           [name]: err.errors[0].message
         }));
-
-      };
+      }
     };
   };
 
@@ -117,12 +129,26 @@ export function CreditCard() {
     })
   }, [formInfos]);
 
+  const [success, setSucces] = useState(false);
+
+  const [simulate] = useMutation(SIMULATE_CARD);
+
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
 
     try {
       const data = schema.parse(formInfos);
-      console.log(data)
+      await simulate({
+        variables: {
+          data,
+          id: paymentId
+        },
+        onCompleted: () => {
+          setSucces(true);
+        }
+      });
+
+      setInterval(() => { window.location.reload() }, 2000);
     }
     catch (err) {
       if (err instanceof ZodError) {
@@ -138,6 +164,8 @@ export function CreditCard() {
 
   return (
     <form className={styles.container} onSubmit={handleSubmit}>
+      {success && <Success />}
+
       <Input
         required
         label="Nome completo"
