@@ -13,6 +13,7 @@ import { LoadingIcon } from "../../components/LoadingIcon";
 import { isExpired } from "../../utils/isExpired";
 import { Expired } from "./expired";
 import { Success } from "../../components/Success";
+import { ApprovedIcon } from "../../components/ApprovedIcon";
 
 const GET_PAYMENT = gql`
   query($id: String!){
@@ -51,6 +52,8 @@ export default function Payment() {
   } = useContext(PaymentContext);
 
   const { paymentId } = useParams();
+  const [concluded, setConcluded] = useState()
+
 
   const { loading } = useQuery(GET_PAYMENT, {
     variables: {
@@ -60,7 +63,8 @@ export default function Payment() {
       setPixInfo(data.payment.pixInfo);
       setClientInfo(data.payment.client);
       setInstallment(data.payment.installment);
-      setPaymentSteps(data.payment.steps)
+      setPaymentSteps(data.payment.steps);
+      setConcluded(data.payment.concluded);
     }
   });
 
@@ -85,34 +89,48 @@ export default function Payment() {
 
   return !loading && clientInfo && (
     <main className={styles.container}>
+
       {paymentSuccess && <Success />}
+
       {loading && <LoadingIcon />}
 
       <h2 className={styles.mainText}>
         {
-          paymentSteps == 1 && installment?.quantity == 1 && `${clientFirstName}, pague o valor de ${installmentValue} no pix`
+          concluded && `${clientFirstName}, parabéns! Você concluiu todo o pagamento!`
+        }
+        {
+          !concluded && paymentSteps == 1 && installment?.quantity == 1 && `${clientFirstName}, pague o valor de ${installmentValue} no pix`
         }
 
         {
-          paymentSteps == 1 && installment?.quantity! > 1 && `${clientFirstName}, pague a entrada de ${installmentValue} no pix`
+          !concluded && paymentSteps == 1 && installment?.quantity! > 1 && `${clientFirstName}, pague a entrada de ${installmentValue} no pix`
         }
 
         {
-          paymentSteps > 1 && paymentSteps != installment?.quantity && `${clientFirstName}, pague a ${paymentSteps}ª parcela em 1x no cartão`
+          !concluded && paymentSteps > 1 && paymentSteps != installment?.quantity && `${clientFirstName}, pague a ${paymentSteps}ª parcela em 1x no cartão`
         }
 
         {
-          paymentSteps == installment?.quantity && installment.quantity != 1 && `${clientFirstName}, pague o restante em 1x no cartão`
+          !concluded && paymentSteps == installment?.quantity && installment.quantity != 1 && `${clientFirstName}, pague o restante em 1x no cartão`
         }
       </h2>
 
       {
-        paymentExpired && <Expired />
+        concluded && <ApprovedIcon />
       }
 
       {
-        paymentSteps == 1 && !paymentExpired ? <Pix /> : <CreditCard />
+        !concluded && paymentExpired && <Expired />
       }
+
+      {
+        !concluded && paymentSteps == 1 && !paymentExpired && <Pix />
+      }
+
+      {
+        !concluded && paymentSteps != 1 && !paymentExpired && <CreditCard />
+      }
+
 
       <Deadline
         time={pixInfo?.expiresIn}
