@@ -2,7 +2,7 @@ import crypto from "node:crypto";
 
 import { Arg, Mutation, Query, Resolver } from "type-graphql";
 import Payment from "../database/entities/Payment";
-import { PaymentModel } from "../models/PaymentModal";
+import { PaymentModel } from "../models/PaymentModel";
 import { PaymentInput } from "../inputs/PaymentInput";
 import { fakePikGenerator } from "../utils/fakePixGenerator";
 
@@ -26,6 +26,8 @@ export class PaymentResolver {
   ) {
 
     const fakePix = fakePikGenerator();
+    const date = new Date();
+    date.setDate(date.getDate() + 2);
 
     const payment = await Payment.create({
       id: crypto.randomUUID(),
@@ -36,7 +38,7 @@ export class PaymentResolver {
       pixInfo: {
         identifier: fakePix.identifier,
         code: fakePix.code,
-        value: input.value
+        expiresIn: date
       },
 
       installment: {
@@ -59,7 +61,7 @@ export class PaymentResolver {
     try {
       const oldPayment = await Payment.findOne({ id });
       const handleSteps = () => {
-        if (oldPayment.steps == oldPayment.installment.quantity) return { concluded: true };
+        if (oldPayment.steps == oldPayment.installment.quantity) return { concluded: true, steps: oldPayment.steps + 1 };
 
         return { steps: oldPayment.steps + 1 }
       };
