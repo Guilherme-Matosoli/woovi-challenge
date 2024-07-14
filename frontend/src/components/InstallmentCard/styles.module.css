@@ -7,15 +7,34 @@
   border-radius: 10px;
   border: 2px solid #E5E5E5;
 
-  transition: all .3s;
+  transition: background .3s;
 
   padding: 21px;
+}
 
-  &:has(input:checked) {
-    border: 2px solid #03D69D;
+.container:has(input:checked),
+.containerFirst:has(input:checked),
+.containerLast:has(input:checked),
+.containerList:has(input:checked) {
+  background: rgba(3, 214, 157, .05);
+}
 
-    background: rgba(3, 214, 157, .05);
-  }
+.container:has(input:checked)::before,
+.containerList:has(input:checked)::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+
+  z-index: 0;
+
+  width: 100%;
+  height: 100%;
+
+  border: 2px solid #03D69D;
+  border-radius: inherit;
+
+  pointer-events: none;
 }
 
 .containerFirst {
@@ -31,10 +50,17 @@
 
   padding: 21px;
 
-  &:has(input:checked) {
-    border: 2px solid #03D69D;
+  &:has(input:checked)::before {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: -2px;
 
-    background: rgba(3, 214, 157, .05);
+    width: 100%;
+    height: 100%;
+
+    border: 2px solid #03d69d;
+    border-radius: inherit;
   }
 }
 
@@ -52,10 +78,17 @@
 
   padding: 21px;
 
-  &:has(input:checked) {
-    border: 2px solid #03D69D;
+  &:has(input:checked)::before {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: -2px;
 
-    background: rgba(3, 214, 157, .05);
+    width: 100%;
+    height: 100%;
+
+    border: 2px solid #03d69d;
+    border-radius: inherit;
   }
 }
 
@@ -71,12 +104,6 @@
   transition: background .3s;
 
   padding: 21px;
-
-  &:has(input:checked) {
-    border: 2px solid #03D69D;
-
-    background: rgba(3, 214, 157, .05);
-  }
 }
 
 .mainCardInfo {
