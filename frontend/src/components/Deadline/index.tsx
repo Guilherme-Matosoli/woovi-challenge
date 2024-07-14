@@ -6,11 +6,15 @@ interface DeadlineProps {
 
 export function Deadline({ time }: DeadlineProps) {
   if (!time) return;
-  const date = new Date(time);
-  const month = String(date.getMonth()).length == 1 ? "0" + date.getMonth() : date.getMonth();
-  const day = String(date.getDate()).length == 1 ? "0" + date.getDate() : date.getDate();
 
-  const formatedDate = `${day}/${month}/${date.getFullYear()} - ${date.getHours()}:${date.getMinutes()}`
+  const date = new Date(time);
+
+  const month = String(date.getMonth()).length == 1 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+  const day = String(date.getDate()).length == 1 ? "0" + date.getDate() : date.getDate();
+  const hour = String(date.getHours()).length == 1 ? "0" + date.getHours() : date.getHours();
+  const minutes = String(date.getMinutes()).length == 1 ? "0" + date.getMinutes() : date.getMinutes();
+
+  const formatedDate = `${day}/${month}/${date.getFullYear()} - ${hour}:${minutes}`
 
   return (
     <div className={styles.container}>
