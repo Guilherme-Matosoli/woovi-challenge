@@ -32,7 +32,7 @@ interface PaymentContextProps {
   setPixInfo: Dispatch<SetStateAction<PixInfo>>,
 
   paymentSteps: number,
-  increaseInstallment: () => void,
+  setPaymentSteps: Dispatch<SetStateAction<number>>,
 
   clientInfo: ClientInfo | undefined,
   setClientInfo: Dispatch<SetStateAction<ClientInfo | undefined>>
@@ -52,10 +52,6 @@ export const PaymentContextProvider = ({ children }: PaymentContextProviderProps
   const [clientInfo, setClientInfo] = useState<ClientInfo>();
 
   const [paymentSteps, setPaymentSteps] = useState(1);
-
-  const increaseInstallment = () => {
-    setPaymentSteps(current => current + 1);
-  };
 
   const installmentValue = useMemo(() => {
     const valueDivided = installment?.value! / 100;
@@ -83,7 +79,7 @@ export const PaymentContextProvider = ({ children }: PaymentContextProviderProps
       setPixInfo,
 
       paymentSteps,
-      increaseInstallment,
+      setPaymentSteps,
 
       clientInfo,
       setClientInfo
