@@ -19,7 +19,7 @@ const schema = z.object({
   name: z
     .string()
     .min(5, "Nome inválido")
-    .regex(/^[A-Za-z\s]+$/, "Nome inválido"),
+    .regex(/^[\p{L}\p{M}\s]+$/u, "Nome inválido"),
 
   cpf: z
     .string()
