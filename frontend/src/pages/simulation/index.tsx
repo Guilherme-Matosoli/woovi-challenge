@@ -21,6 +21,7 @@ const GET_VALUE = gql`
       installment{
         value
       }
+      concluded
     }
   }
 `;
@@ -28,12 +29,14 @@ const GET_VALUE = gql`
 export function Simulation() {
   const [value, setValue] = useState();
   const [success, setSuccess] = useState(false);
+  const [concluded, setConcluded] = useState(false);
   const { paymentId } = useParams();
 
   const query = useQuery(GET_VALUE, {
     variables: { id: paymentId },
     onCompleted: data => {
-      setValue(data.payment.installment.value)
+      setValue(data.payment.installment.value);
+      setConcluded(data.payment.concluded)
     }
   });
 
@@ -46,9 +49,10 @@ export function Simulation() {
         socket.emit("payment", { id: paymentId });
 
         setSuccess(true);
-        setInterval(() => { setSuccess(false) }, 2000);
       }
     });
+
+    setInterval(() => { setSuccess(false) }, 2000);
   };
 
   const navigate = useNavigate();
@@ -60,15 +64,24 @@ export function Simulation() {
     <main className={styles.container}>
       <h1>Simulador de pagamentos</h1>
       <h2>
-        Simular pagamento de {currencyFormatter.format(value! / 100)}
+        {
+          concluded && "Este pagamento Pix já foi simulado. Para simular os demais, preencha o formulário de pagamento por cartão."
+        }
+        {
+          !concluded && <>Simular pagamento de {currencyFormatter.format(value! / 100)}</>
+
+        }
       </h2>
 
-      <Button onClick={simulate}>
+      <Button onClick={simulate} disabled={concluded == true}>
         {
           success && "Pagamento simulado!"
         }
         {
-          loading && !success ? <LoadingIcon /> : "Clique aqui para simular!"
+          !success && loading && <LoadingIcon />
+        }
+        {
+          !success && !loading && "Clique aqui para simular!"
         }
       </Button>
 
