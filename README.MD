@@ -27,6 +27,7 @@
 
 #### O protótipo apresenta que o cliente poderia pagar a segunda parcela no cartão e que a entrada é no pix. Com base nisso, tomei a decisão de padrozinar o primeiro pagamento como pix SEMPRE e os demais no cartão. 
 
+#### O tratamento de valores foi feito com números inteiros multiplicando so valores por 100. Ao exibir os valores em tela, eles são divididos por 100 e formatados em BRL pela função responsável
 ---
 
 ## Layout principal
