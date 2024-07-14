@@ -28,8 +28,8 @@ interface PaymentContextProps {
   total: string,
   installmentValue: string,
 
-  pixInfo: PixInfo,
-  setPixInfo: Dispatch<SetStateAction<PixInfo>>,
+  pixInfo: PixInfo | undefined,
+  setPixInfo: Dispatch<SetStateAction<PixInfo | undefined>>,
 
   paymentSteps: number,
   setPaymentSteps: Dispatch<SetStateAction<number>>,
@@ -43,11 +43,7 @@ export const PaymentContext = createContext({} as PaymentContextProps);
 
 export const PaymentContextProvider = ({ children }: PaymentContextProviderProps) => {
   const [installment, setInstallment] = useState<Installment>();
-  const [pixInfo, setPixInfo] = useState<PixInfo>({
-    identifier: "2c1b951f356c4680b13ba1c9fc889c47",
-    code: "JHGASJDGKJHGJUH3I2U4632847JKSHDFABI7Y6T342UYGJKDHSFAGVF87T34GHJVHJ",
-    expiresIn: new Date()
-  });
+  const [pixInfo, setPixInfo] = useState<PixInfo>();
 
   const [clientInfo, setClientInfo] = useState<ClientInfo>();
 
