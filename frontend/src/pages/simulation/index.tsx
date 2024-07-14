@@ -21,7 +21,7 @@ const GET_VALUE = gql`
       installment{
         value
       }
-      concluded
+      steps
     }
   }
 `;
@@ -29,14 +29,14 @@ const GET_VALUE = gql`
 export function Simulation() {
   const [value, setValue] = useState();
   const [success, setSuccess] = useState(false);
-  const [concluded, setConcluded] = useState(false);
+  const [steps, setSteps] = useState<number>(0);
   const { paymentId } = useParams();
 
   const query = useQuery(GET_VALUE, {
     variables: { id: paymentId },
     onCompleted: data => {
       setValue(data.payment.installment.value);
-      setConcluded(data.payment.concluded)
+      setSteps(data.payment.steps)
     }
   });
 
@@ -52,7 +52,7 @@ export function Simulation() {
       }
     });
 
-    setInterval(() => { setSuccess(false) }, 2000);
+    setInterval(() => { window.location.reload() }, 3000);
   };
 
   const navigate = useNavigate();
@@ -65,15 +65,15 @@ export function Simulation() {
       <h1>Simulador de pagamentos</h1>
       <h2>
         {
-          concluded && "Este pagamento Pix já foi simulado. Para simular os demais, preencha o formulário de pagamento por cartão."
+          steps > 1 && "Este pagamento Pix já foi simulado. Para simular os demais, preencha o formulário de pagamento por cartão."
         }
         {
-          !concluded && <>Simular pagamento de {currencyFormatter.format(value! / 100)}</>
+          !(steps > 1) && <>Simular pagamento de {currencyFormatter.format(value! / 100)}</>
 
         }
       </h2>
 
-      <Button onClick={simulate} disabled={concluded == true}>
+      <Button onClick={simulate} disabled={steps > 1}>
         {
           success && "Pagamento simulado!"
         }
