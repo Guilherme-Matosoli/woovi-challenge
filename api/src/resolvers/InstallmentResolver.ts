@@ -1,4 +1,4 @@
-import { Arg, Query, Resolver } from "type-graphql";
+import { Query, Resolver } from "type-graphql";
 import { InstallmentModel } from "../models/InstallmentModel";
 
 const Installments = [
