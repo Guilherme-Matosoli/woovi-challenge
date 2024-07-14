@@ -22,6 +22,9 @@ interface ClientInfo {
 };
 
 interface PaymentContextProps {
+  paymentId: string | undefined,
+  setPaymentId: Dispatch<SetStateAction<string | undefined>>,
+
   installment: Installment | undefined,
   setInstallment: Dispatch<SetStateAction<Installment | undefined>>,
 
@@ -42,11 +45,10 @@ interface PaymentContextProps {
 export const PaymentContext = createContext({} as PaymentContextProps);
 
 export const PaymentContextProvider = ({ children }: PaymentContextProviderProps) => {
+  const [paymentId, setPaymentId] = useState<string>();
   const [installment, setInstallment] = useState<Installment>();
   const [pixInfo, setPixInfo] = useState<PixInfo>();
-
   const [clientInfo, setClientInfo] = useState<ClientInfo>();
-
   const [paymentSteps, setPaymentSteps] = useState(1);
 
   const installmentValue = useMemo(() => {
@@ -65,6 +67,9 @@ export const PaymentContextProvider = ({ children }: PaymentContextProviderProps
 
   return (
     <PaymentContext.Provider value={{
+      paymentId,
+      setPaymentId,
+
       installment,
       setInstallment,
 
