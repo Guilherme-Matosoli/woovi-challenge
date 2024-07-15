@@ -39,13 +39,19 @@
 
 ## Home page
 
-#### No figma não nos foi apresentado alguma espécie de página home, mas como percebi que na primeira tela haviam informações do cliente (nome que, por padrão, estava "João"), tomei a liberdade de implementar uma.
+#### O protótipo do Figma não apresentava uma página home, então me dei a liberdade e implementei uma.
 
-#### A homepage é simples, possui apenas um texto de boas vindas, dois campos para o cliente informar seu nome e cpf e um botão para proseguir.
-#### Antes de prosseguir, o CPF e o nome são validados: CPF verificado por meio de cálculo (de validação do CPF) e o nome é verificado se não há caracteres não permitidos em nomes de pessoas
+#### A página home tem como intuito ajudar o usuário a se localizar na aplicação. Caso ele já tenha algum pagamento, ele pode o listar, senão ele pode começar um novo pagamento clicando no botão de "Novo".
 
 ---
 
+
+## NewPayment page
+
+#### A NewPayment page serve, como o próprio nome deixa explícito, criar um novo pagamento.
+#### Apresenta 2 campos, um de email e outro de cpf, para que o cliente preencha seus dados e prossiga para a tela de escolher parcelas.
+
+---
 
 ## Installments Page
 
@@ -81,6 +87,7 @@
 # Rotas
 
 - / - Home Page
+- /payment/new - Página de criação de novo pagamento
 - /payment/installments - Página de parcelas
 - /payment/pay/:paymentId - Página de pagamento (paymentId como parâmetro)
 - /simulation/:paymentId - Página de simulação do pix (paymentId como parâmetro)
