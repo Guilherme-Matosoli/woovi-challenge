@@ -245,7 +245,7 @@ export function CreditCard() {
         options={[
           {
             value: "1",
-            label: currencyFormatter.format(installment?.value! / 100)
+            label: "1x " + currencyFormatter.format(installment?.value! / 100)
           }
         ]}
       />
