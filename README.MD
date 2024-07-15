@@ -55,6 +55,8 @@
 
 #### Como no Figma as opções se mostram selecionáveis, eu estranhei a falta de um botão de confirmação. Decidi implementar e adicionei 2 botões idênticos, um no topo e outro no fim para que, caso o usuário tenha descido muito na página, o botão inferior esteja acessível, e caso ele não tenha descido, o superior esteja acessível.
 
+#### Ao escolher uma opção e clicar no botão, uma requisição é feita para a API para criar uma nova instância de pagamento no banco de dados.
+
 #### Os botões somente são habilitados após o usuário escolher uma opção.
 
 ---
