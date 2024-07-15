@@ -19,6 +19,20 @@ export class PaymentResolver {
     return payment;
   };
 
+  @Query(() => [PaymentModel])
+  async getAllPayments(
+    @Arg("cpf")
+    cpf: string
+  ) {
+    try {
+      const payments = Payment.find({ "client.cpf": cpf });
+      return payments
+    }
+    catch (err) {
+      console.log(err);
+    }
+  };
+
   @Mutation(() => PaymentModel)
   async createPayment(
     @Arg("input")
