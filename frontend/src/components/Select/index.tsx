@@ -1,11 +1,17 @@
 import { SelectHTMLAttributes } from "react";
 import styles from "./styles.module.css";
 
-interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
+interface Option {
+  value: string,
   label: string
 }
 
-export function Select({ label }: SelectProps) {
+interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
+  label: string,
+  options: Option[]
+};
+
+export function Select({ label, options }: SelectProps) {
   return (
     <div className={styles.container}>
       <label htmlFor="select">
@@ -13,7 +19,11 @@ export function Select({ label }: SelectProps) {
       </label>
 
       <select name="select">
-        <option value="1">1x de R$ 15.300,00</option>
+        {
+          options.map(option => {
+            return <option value={option.value}>{option.label}</option>
+          })
+        }
       </select>
 
       <img

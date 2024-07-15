@@ -15,6 +15,7 @@ import { Success } from "../../../components/Success";
 import { useParams } from "react-router-dom";
 import { LoadingIcon } from "../../../components/LoadingIcon";
 import { PaymentContext } from "../../../contexts/PaymentContext";
+import { currencyFormatter } from "../../../utils/currencyFormater";
 
 interface FormInfos {
   name: string,
@@ -62,7 +63,7 @@ const schema = z.object({
 
 export function CreditCard() {
   const { paymentId } = useParams();
-  const { clientInfo } = useContext(PaymentContext);
+  const { clientInfo, installment } = useContext(PaymentContext);
 
   const cpfMask = useMask({ mask: '___.___.___-__', replacement: { _: /\d/ } });
   const ccNumberMask = useMask({ mask: '____ ____ ____ ____', replacement: { _: /\d/ } });
@@ -241,6 +242,12 @@ export function CreditCard() {
         label="Parcelas"
         value={formInfos.installments}
         onChange={setInfos}
+        options={[
+          {
+            value: "1",
+            label: currencyFormatter.format(installment?.value! / 100)
+          }
+        ]}
       />
 
       <Button
