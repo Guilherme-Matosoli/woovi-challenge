@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { Container } from "./styles";
 
 interface DeadlineProps {
@@ -16,9 +17,11 @@ export function Deadline({ time }: DeadlineProps) {
 
   const formatedDate = `${day}/${month}/${date.getFullYear()} - ${hour}:${minutes}`
 
+  const { t } = useTranslation();
+
   return (
     <Container>
-      <span>Prazo de pagamento:</span>
+      <span>{t("components.deadline")}:</span>
       <strong>{formatedDate}</strong>
     </Container>
   )

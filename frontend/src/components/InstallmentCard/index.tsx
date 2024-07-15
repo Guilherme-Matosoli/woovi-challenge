@@ -4,6 +4,7 @@ import { BenefitFlag } from "../BenefitFlag";
 import { RadioInput } from "../RadioInput";
 import { currencyFormatter } from "../../utils/currencyFormater";
 import { Container } from "./styles";
+import { useTranslation } from "react-i18next";
 
 interface InstallmentCardProps extends InputHTMLAttributes<HTMLInputElement> {
   installmentQuantity: number,
@@ -39,6 +40,8 @@ export function InstallmentCard({ mainTitle, benefitText, installmentQuantity, i
     return "middle"
   };
 
+  const { t } = useTranslation();
+
   return (
     <Container className={handleContainer()}>
       <label>      <span className={mainTitle ? "mainCardInfo" : "hidden"}>
@@ -55,7 +58,7 @@ export function InstallmentCard({ mainTitle, benefitText, installmentQuantity, i
         {
           installmentQuantity == 1 ? (
             <span className="bonusInfo">
-              Ganhe <strong>3%</strong> de Cashback
+              {t("components.installmentCard.1")} <strong>3%</strong> {t("components.installmentCard.2")}
             </span>
           ) :
             (

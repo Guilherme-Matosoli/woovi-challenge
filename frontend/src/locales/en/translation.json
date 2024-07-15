@@ -1,0 +1,7 @@
+{
+  "home": {
+    "mainText": "Hello, welcome! Enter your CPF to list your payments or create a new payment.",
+    "new": "New",
+    "listPayments": "List payments"
+  }
+}

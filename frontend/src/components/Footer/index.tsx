@@ -1,6 +1,9 @@
+import { useTranslation } from "react-i18next";
 import { Container } from "./styles";
 
 export function Footer() {
+  const { t } = useTranslation();
+
   return (
     <Container>
       <img
@@ -9,7 +12,7 @@ export function Footer() {
       />
 
       <span className="text">
-        Pagamento 100% seguro via:
+        {t("components.footer")}
       </span>
 
       <img

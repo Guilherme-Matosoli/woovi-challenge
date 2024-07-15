@@ -4,12 +4,15 @@ import { copyToClipboard } from "../../../utils/copyToClipboard";
 import { PaymentContext } from "../../../contexts/PaymentContext";
 import { QrCode } from "../../../components/QrCode";
 import { Container } from "./styles";
+import { useTranslation } from "react-i18next";
 
 
 export function Pix() {
   const [copied, setCopied] = useState(false);
 
   const { pixInfo } = useContext(PaymentContext);
+
+  const { t } = useTranslation();
 
   return (
     <Container>
@@ -29,14 +32,14 @@ export function Pix() {
           {
             copied
               ?
-              "Copiado!"
+              t("payment.pix.copied")
               :
               <>
                 <img
                   src="/copy-icon.svg"
                   alt="Copiar"
                 />
-                Clique para copiar o QR CODE
+                {t("payment.pix.copyText")}
               </>
           }
         </Button>

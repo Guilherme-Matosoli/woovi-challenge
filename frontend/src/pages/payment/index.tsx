@@ -15,6 +15,7 @@ import { Success } from "../../components/Success";
 import { ApprovedIcon } from "../../components/ApprovedIcon";
 import { Container } from "./styles";
 import { MainText } from "../../globals";
+import { useTranslation } from "react-i18next";
 
 const GET_PAYMENT = gql`
   query($id: String!){
@@ -88,6 +89,8 @@ export default function Payment() {
   const clientFirstName = clientInfo?.name.split(" ")[0];
   const paymentExpired = isExpired(pixInfo?.expiresIn!) && paymentSteps == 1;
 
+  const { t } = useTranslation();
+
   return !loading && clientInfo && (
     <Container>
 
@@ -97,22 +100,22 @@ export default function Payment() {
 
       <MainText>
         {
-          concluded && `${clientFirstName}, parabéns! Você concluiu todo o pagamento!`
+          concluded && `${clientFirstName}, ${t("payment.mainText.congratulations")}`
         }
         {
-          !concluded && paymentSteps == 1 && installment?.quantity == 1 && !paymentExpired && `${clientFirstName}, pague o valor de ${installmentValue} no pix`
-        }
-
-        {
-          !concluded && paymentSteps == 1 && installment?.quantity! > 1 && `${clientFirstName}, pague a entrada de ${installmentValue} no pix`
+          !concluded && paymentSteps == 1 && installment?.quantity == 1 && !paymentExpired && `${clientFirstName}, ${t("payment.mainText.firstPayment.1")} ${installmentValue} ${"payment.mainText.firstPayment.2"}`
         }
 
         {
-          !concluded && paymentSteps > 1 && paymentSteps != installment?.quantity && `${clientFirstName}, pague a ${paymentSteps}ª parcela em 1x no cartão`
+          !concluded && paymentSteps == 1 && installment?.quantity! > 1 && `${clientFirstName}, ${t("payment.mainText.enter.1")} ${installmentValue} ${t("payment.mainText.enter.2")}`
         }
 
         {
-          !concluded && paymentSteps == installment?.quantity && installment.quantity != 1 && `${clientFirstName}, pague o restante em 1x no cartão`
+          !concluded && paymentSteps > 1 && paymentSteps != installment?.quantity && `${clientFirstName}, ${t("payment.mainText.installment.1")} ${paymentSteps}ª ${t("payment.mainText.installment.1")}`
+        }
+
+        {
+          !concluded && paymentSteps == installment?.quantity && installment.quantity != 1 && `${clientFirstName}, ${t("payment.mainText.rest")}`
         }
       </MainText>
 
@@ -151,7 +154,7 @@ export default function Payment() {
       <AccordionUsage />
 
       <section className="paymentId">
-        <span>Identificador:</span>
+        <span>{t("payment.identifier")}:</span>
         <strong>{pixInfo?.identifier}</strong>
       </section>
     </Container>

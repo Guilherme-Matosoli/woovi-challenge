@@ -8,6 +8,7 @@ import { gql, useMutation, useQuery } from "@apollo/client";
 import { LoadingIcon } from "../../components/LoadingIcon";
 import { Container } from "./styles";
 import { MainText } from "../../globals";
+import { useTranslation } from "react-i18next";
 
 
 const GET_INSTALLMENTS = gql`
@@ -93,10 +94,12 @@ export default function Installments() {
     });
   };
 
+  const { t } = useTranslation();
+
   return options && (
     <Container>
       <MainText>
-        {clientInfo?.name.split(" ")[0]}, como você quer pagar?
+        {clientInfo?.name.split(" ")[0]}, {t("installments.howPay")}
       </MainText>
 
       <form className="form" onSubmit={handleSubmit}>
@@ -105,7 +108,7 @@ export default function Installments() {
           type="submit"
         >
           {
-            loading ? <LoadingIcon /> : "Prosseguir para o pagamento"
+            loading ? <LoadingIcon /> : t("installments.continueToPayment")
           }
         </Button>
 
@@ -148,7 +151,7 @@ export default function Installments() {
           type="submit"
         >
           {
-            loading ? <LoadingIcon /> : "Prosseguir para o pagamento"
+            loading ? <LoadingIcon /> : t("installments.continueToPayment")
           }
         </Button>
       </form>

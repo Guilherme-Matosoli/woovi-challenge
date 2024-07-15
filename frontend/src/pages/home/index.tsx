@@ -12,6 +12,7 @@ import { FormEvent, useState } from "react";
 import { gql } from "@apollo/client";
 import { client } from "../../services/apollo";
 import { MainText } from "../../globals";
+import { useTranslation } from "react-i18next";
 
 
 interface Payments {
@@ -68,10 +69,12 @@ export default function Home() {
     };
   };
 
+  const { t } = useTranslation();
+
   return (
     <Container>
       <MainText>
-        Olá, seja bem vindo(a)! Digite seu CPF para listar seus pagamentos ou crie um novo pagamento.
+        {t("home.mainText")}
       </MainText>
 
       <form onSubmit={handleSubmit}>
@@ -90,7 +93,7 @@ export default function Home() {
           />
 
           <Link to="/payment/new" className="buttonNew">
-            Novo
+            {t("home.new")}
           </Link>
         </div>
 
@@ -98,7 +101,7 @@ export default function Home() {
           payments && <PaymentList payments={payments} />
         }
 
-        <Button text="Listar pagamentos" type="submit" />
+        <Button text={t("home.listPayments")} type="submit" />
       </form>
     </Container>
   );

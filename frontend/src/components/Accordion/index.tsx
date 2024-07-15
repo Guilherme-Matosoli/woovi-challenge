@@ -1,8 +1,11 @@
+import { useTranslation } from "react-i18next";
 import styles from "./styles.module.css";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 
 
 export function AccordionUsage() {
+  const { t } = useTranslation();
+
   return (
     <div>
       <Accordion className={styles.container}>
@@ -12,7 +15,7 @@ export function AccordionUsage() {
           id="panel1-header"
           className={styles.text}
         >
-          Como funciona?
+          {t("components.accordion")}
         </AccordionSummary>
 
         <AccordionDetails className={styles.description}>

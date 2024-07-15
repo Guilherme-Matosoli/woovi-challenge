@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { currencyFormatter } from "../../utils/currencyFormater";
 import { Container } from "./styles";
+import { useTranslation } from "react-i18next";
 
 interface Payment {
   id: string,
@@ -37,6 +38,8 @@ export function PaymentCard({ index, totalItems, payment }: PaymentCardProps) {
     return `${payment.installment.quantity}x ${installmentValue}`
   };
 
+  const { t } = useTranslation();
+
   return (
     <Container className={handleContainer()}>
       <div className="paymentInfo">
@@ -45,7 +48,7 @@ export function PaymentCard({ index, totalItems, payment }: PaymentCardProps) {
         </span>
 
         <span className="installment">
-          Parcelas: <strong> {installments()}</strong>
+          {t("components.paymentCard")}: <strong> {installments()}</strong>
         </span>
       </div>
 

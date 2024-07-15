@@ -8,6 +8,7 @@ import { PaymentContext } from "../../contexts/PaymentContext";
 import { useNavigate } from "react-router-dom";
 import { Container } from "./styles";
 import { MainText } from "../../globals";
+import { useTranslation } from "react-i18next";
 
 
 interface FormInfos {
@@ -80,14 +81,16 @@ export default function NewPayment() {
     };
   };
 
+  const { t } = useTranslation();
+
   return (
     <Container>
       <MainText className="mainText">
-        Digite seus dados abaixo para iniciar um novo pagamento:
+        {t("newPayment.mainText")}
       </MainText>
       <form className="form" onSubmit={handleSubmit}>
         <Input
-          label="Nome completo"
+          label={t("newPayment.name")}
           name="name"
           required
           errorMessage={errors.name}
@@ -108,7 +111,7 @@ export default function NewPayment() {
         />
 
         <Button
-          text="Escolher parcelas"
+          text={t("newPayment.chooseInstallment")}
           type="submit"
         />
       </form>

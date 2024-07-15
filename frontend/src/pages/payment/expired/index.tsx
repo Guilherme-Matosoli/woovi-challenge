@@ -1,6 +1,9 @@
+import { useTranslation } from "react-i18next";
 import { Container } from "./styles";
 
 export function Expired() {
+  const { t } = useTranslation();
+
   return (
     <Container>
       <div className="circle">
@@ -11,7 +14,7 @@ export function Expired() {
       </div>
 
       <h3>
-        Prazo de pagamento expirado
+        {t("payment.expired")}
       </h3>
     </Container>
   )

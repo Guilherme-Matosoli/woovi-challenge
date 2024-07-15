@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { PaymentCard } from "../PaymentCard";
 import { Container, Warning } from "./styles";
 
@@ -15,8 +16,9 @@ interface PaymentListProps {
 };
 
 export function PaymentList({ payments }: PaymentListProps) {
+  const { t } = useTranslation();
 
-  if (payments?.length! < 1) return <Warning>Você ainda não fez um pagamento, clique em "Novo" e comece um novo!</Warning>
+  if (payments?.length! < 1) return <Warning>{t("components.paymentList")}</Warning>
 
   return (
     <Container>
