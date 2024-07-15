@@ -28,7 +28,7 @@ const schema = z.object({
     .refine(validateCpf, "CPF inválido"),
 });
 
-export default function Home() {
+export default function NewPayment() {
   const { setClientInfo } = useContext(PaymentContext);
 
   const cpfMask = useMask({ mask: '___.___.___-__', replacement: { _: /\d/ } });
