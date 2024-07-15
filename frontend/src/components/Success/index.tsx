@@ -1,15 +1,15 @@
 import { ApprovedIcon } from "../ApprovedIcon";
-import styles from "./styles.module.css";
+import { Container } from "./styles";
 
 
 export function Success() {
   return (
-    <article className={styles.container}>
+    <Container>
       <ApprovedIcon />
 
       <h2>
         Pagamento realizado com sucesso!
       </h2>
-    </article>
+    </Container>
   )
 }

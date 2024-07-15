@@ -1,4 +1,4 @@
-import styles from "./styles.module.css";
+import { Container } from "./styles";
 import { QRCodeSVG } from "qrcode.react";
 
 interface QrCodeProps {
@@ -7,8 +7,8 @@ interface QrCodeProps {
 
 export function QrCode({ value }: QrCodeProps) {
   return (
-    <div className={styles.container}>
-      <QRCodeSVG value={value} className={styles.qrcode} />
-    </div>
+    <Container>
+      <QRCodeSVG value={value} className="qrcode" />
+    </Container>
   )
 }

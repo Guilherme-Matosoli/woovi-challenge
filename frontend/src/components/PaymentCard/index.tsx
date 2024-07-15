@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import styles from "./styles.module.css";
 import { currencyFormatter } from "../../utils/currencyFormater";
+import { Container } from "./styles";
 
 interface Payment {
   id: string,
@@ -20,9 +20,9 @@ interface PaymentCardProps {
 export function PaymentCard({ index, totalItems, payment }: PaymentCardProps) {
 
   const handleContainer = () => {
-    if (index == 0) return styles.first;
-    if (index == totalItems) return styles.last;
-    return styles.middle
+    if (index == 0) return "first";
+    if (index == totalItems) return "last";
+    return "middle"
   };
 
   const total = () => {
@@ -38,23 +38,23 @@ export function PaymentCard({ index, totalItems, payment }: PaymentCardProps) {
   };
 
   return (
-    <article className={`${styles.container} ${handleContainer()}`}>
-      <div className={styles.paymentInfo}>
-        <span className={styles.total}>
+    <Container className={handleContainer()}>
+      <div className="paymentInfo">
+        <span className="total">
           Total: <strong> {total()}</strong>
         </span>
 
-        <span className={styles.installment}>
+        <span className="installment">
           Parcelas: <strong> {installments()}</strong>
         </span>
       </div>
 
-      <Link to={`/payment/pay/${payment.id}`} className={styles.link}>
+      <Link to={`/payment/pay/${payment.id}`} className="link">
         <img
           src="/arrow-right.svg"
           alt="Seta para direita"
         />
       </Link>
-    </article>
+    </Container>
   );
 };

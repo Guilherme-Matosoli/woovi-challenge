@@ -1,4 +1,4 @@
-import styles from "./styles.module.css";
+import { Container } from "./styles";
 
 interface DeadlineProps {
   time: Date | undefined
@@ -17,9 +17,9 @@ export function Deadline({ time }: DeadlineProps) {
   const formatedDate = `${day}/${month}/${date.getFullYear()} - ${hour}:${minutes}`
 
   return (
-    <div className={styles.container}>
+    <Container>
       <span>Prazo de pagamento:</span>
       <strong>{formatedDate}</strong>
-    </div>
+    </Container>
   )
 }

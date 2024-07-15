@@ -1,5 +1,5 @@
 import { PaymentCard } from "../PaymentCard";
-import styles from "./styles.module.css";
+import { Container, Warning } from "./styles";
 
 interface Payment {
   id: string,
@@ -16,10 +16,10 @@ interface PaymentListProps {
 
 export function PaymentList({ payments }: PaymentListProps) {
 
-  if (payments?.length! < 1) return <h3 className={styles.warning}>Você ainda não fez um pagamento, clique em "Novo" e comece um novo!</h3>
+  if (payments?.length! < 1) return <Warning>Você ainda não fez um pagamento, clique em "Novo" e comece um novo!</Warning>
 
   return (
-    <section className={styles.container}>
+    <Container>
       {
         payments && payments.map((payment, index) => {
           return (
@@ -31,6 +31,6 @@ export function PaymentList({ payments }: PaymentListProps) {
           )
         })
       }
-    </section>
+    </Container>
   )
 }

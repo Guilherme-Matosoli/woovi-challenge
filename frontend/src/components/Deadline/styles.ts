@@ -1,4 +1,7 @@
-.container {
+import styled from "styled-components";
+
+
+export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -17,4 +20,4 @@
     font-weight: 800;
     color: #4D4D4D;
   }
-}
+`;

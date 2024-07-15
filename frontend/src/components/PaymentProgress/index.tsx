@@ -1,13 +1,13 @@
 import { useContext } from "react";
 import { PaymentStep } from "../PaymentStep";
-import styles from "./styles.module.css";
 import { PaymentContext } from "../../contexts/PaymentContext";
+import { Container } from "./styles";
 
 export function PaymentProgress() {
   const { paymentSteps, installment } = useContext(PaymentContext);
 
   return (
-    <section className={styles.container}>
+    <Container>
       {
         Array.from({ length: installment?.quantity || 0 }, (_, index) => {
           const installmentNumber = index + 1;
@@ -24,6 +24,6 @@ export function PaymentProgress() {
           )
         })
       }
-    </section>
+    </Container>
   )
 }

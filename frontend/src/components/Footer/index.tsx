@@ -1,14 +1,14 @@
-import styles from "./styles.module.css";
+import { Container } from "./styles";
 
 export function Footer() {
   return (
-    <footer className={styles.container}>
+    <Container>
       <img
         src="/security-badge.svg"
         alt="Ícone de segurança"
       />
 
-      <span className={styles.text}>
+      <span className="text">
         Pagamento 100% seguro via:
       </span>
 
@@ -16,6 +16,6 @@ export function Footer() {
         src="/footer-logo.svg"
         alt="Woovi"
       />
-    </footer>
+    </Container>
   )
 }

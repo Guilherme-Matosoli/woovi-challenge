@@ -1,4 +1,6 @@
-.container {
+import styled from "styled-components";
+
+export const Container = styled.div`
   position: relative;
   width: 100%;
 
@@ -64,4 +66,4 @@
   &:has(select:focus) label {
     color: #0c8ce9;
   }
-}
+`;

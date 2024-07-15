@@ -1,9 +1,9 @@
-import styles from "./styles.module.css";
 import { useContext, useState } from "react";
 import { Button } from "../../../components/Button";
 import { copyToClipboard } from "../../../utils/copyToClipboard";
 import { PaymentContext } from "../../../contexts/PaymentContext";
 import { QrCode } from "../../../components/QrCode";
+import { Container } from "./styles";
 
 
 export function Pix() {
@@ -12,10 +12,10 @@ export function Pix() {
   const { pixInfo } = useContext(PaymentContext);
 
   return (
-    <div className={styles.container}>
+    <Container>
       <QrCode value={pixInfo?.code!} />
 
-      <div className={styles.buttonWrapper}>
+      <div className="buttonWrapper">
         <Button
           onClick={() => {
             copyToClipboard(pixInfo?.code!);
@@ -42,6 +42,6 @@ export function Pix() {
         </Button>
       </div>
 
-    </div>
+    </Container>
   )
 }

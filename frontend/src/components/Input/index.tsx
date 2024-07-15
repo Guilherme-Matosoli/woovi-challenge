@@ -1,4 +1,4 @@
-import styles from "./styles.module.css";
+import { Container } from "./styles";
 import { BaseTextFieldProps, TextField } from "@mui/material"
 
 interface InputProps extends BaseTextFieldProps {
@@ -9,9 +9,9 @@ interface InputProps extends BaseTextFieldProps {
 
 export function Input({ label, onChange, errorMessage, ...rest }: InputProps) {
   return (
-    <div className={styles.container}>
+    <Container>
       <TextField
-        className={styles.input}
+        className="input"
         label={label}
         onChange={onChange}
         error={errorMessage ? true : false}
@@ -30,8 +30,8 @@ export function Input({ label, onChange, errorMessage, ...rest }: InputProps) {
       />
 
       {
-        errorMessage && <span className={styles.error}>{errorMessage}</span>
+        errorMessage && <span className="error">{errorMessage}</span>
       }
-    </div>
+    </Container>
   )
 }

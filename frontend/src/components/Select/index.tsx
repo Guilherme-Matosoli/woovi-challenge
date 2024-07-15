@@ -1,5 +1,5 @@
 import { SelectHTMLAttributes } from "react";
-import styles from "./styles.module.css";
+import { Container } from "./styles";
 
 interface Option {
   value: string,
@@ -13,7 +13,7 @@ interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
 
 export function Select({ label, options }: SelectProps) {
   return (
-    <div className={styles.container}>
+    <Container>
       <label htmlFor="select">
         {label}
       </label>
@@ -30,6 +30,6 @@ export function Select({ label, options }: SelectProps) {
         src="/arrow.svg"
         alt="Seta"
       />
-    </div>
+    </Container>
   )
 }

@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from "react";
 import { AccordionUsage } from "../../components/Accordion";
 import { Deadline } from "../../components/Deadline";
 import { PaymentProgress } from "../../components/PaymentProgress";
-import styles from "./styles.module.css";
 import { PaymentContext } from "../../contexts/PaymentContext";
 import { Pix } from "./pix";
 import { CreditCard } from "./creditCard";
@@ -14,6 +13,8 @@ import { isExpired } from "../../utils/isExpired";
 import { Expired } from "./expired";
 import { Success } from "../../components/Success";
 import { ApprovedIcon } from "../../components/ApprovedIcon";
+import { Container } from "./styles";
+import { MainText } from "../../globals";
 
 const GET_PAYMENT = gql`
   query($id: String!){
@@ -88,13 +89,13 @@ export default function Payment() {
   const paymentExpired = isExpired(pixInfo?.expiresIn!) && paymentSteps == 1;
 
   return !loading && clientInfo && (
-    <main className={styles.container}>
+    <Container>
 
       {paymentSuccess && <Success />}
 
       {loading && <LoadingIcon />}
 
-      <h2 className={styles.mainText}>
+      <MainText>
         {
           concluded && `${clientFirstName}, parabéns! Você concluiu todo o pagamento!`
         }
@@ -113,7 +114,7 @@ export default function Payment() {
         {
           !concluded && paymentSteps == installment?.quantity && installment.quantity != 1 && `${clientFirstName}, pague o restante em 1x no cartão`
         }
-      </h2>
+      </MainText>
 
       {
         concluded && <ApprovedIcon />
@@ -137,22 +138,22 @@ export default function Payment() {
       />
       <PaymentProgress />
 
-      <section className={styles.fee}>
-        <span className={styles.info}>
+      <section className="fee">
+        <span className="info">
           CET: 0,5%
         </span>
 
-        <span className={styles.value}>
+        <span className="value">
           Total: {total}
         </span>
       </section>
 
       <AccordionUsage />
 
-      <section className={styles.paymentId}>
+      <section className="paymentId">
         <span>Identificador:</span>
         <strong>{pixInfo?.identifier}</strong>
       </section>
-    </main>
+    </Container>
   )
 }

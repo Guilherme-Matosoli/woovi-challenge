@@ -1,8 +1,8 @@
 import { useContext, useMemo } from "react";
 import { StepStatus } from "../StepStatus";
-import styles from "./styles.module.css";
 import { currencyFormatter } from "../../utils/currencyFormater";
 import { PaymentContext } from "../../contexts/PaymentContext";
+import { Container } from "./styles";
 
 interface PaymentStepProps {
   installmentNumber: number,
@@ -23,15 +23,15 @@ export function PaymentStep({ installmentNumber, installmentsQuantity, installme
   const { paymentSteps } = useContext(PaymentContext);
 
   return (
-    <div className={styles.container}>
-      <div className={styles.info}>
+    <Container>
+      <div className="info">
         <StepStatus
           haveNext={installmentNumber != installmentsQuantity}
           checked={concluded}
           actual={installmentNumber == paymentSteps}
         />
 
-        <span className={styles.description}>
+        <span className="description">
           {installmentNumber == 1 && installmentsQuantity == 1 && "Pagamento no pix"}
 
           {installmentNumber == 1 && installmentsQuantity != 1 && "1ª entrada no pix"}
@@ -40,9 +40,9 @@ export function PaymentStep({ installmentNumber, installmentsQuantity, installme
         </span>
       </div>
 
-      <strong className={styles.strong}>
+      <strong className="strong">
         {formatedValue}
       </strong>
-    </div>
+    </Container>
   )
 }

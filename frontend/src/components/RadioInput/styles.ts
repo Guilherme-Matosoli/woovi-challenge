@@ -1,4 +1,6 @@
-.input {
+import styled from "styled-components";
+
+export const Input = styled.input`
   position: relative;
   width: 26px;
 
@@ -18,8 +20,8 @@
     width: 26px;
     height: 26px;
 
-    background-color: #03D69D;
-    border: 1px solid #03D69D;
+    background-color: var(--primary-color);
+    border: 1px solid var(--primary-color);
     border-radius: 50%;
   }
-}
+`;

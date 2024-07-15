@@ -1,14 +1,17 @@
+import { Container } from "./styles";
+
 import { Link } from "react-router-dom";
 import { Input } from "../../components/Input";
-import styles from "./styles.module.css";
 import { Button } from "../../components/Button";
+import { PaymentList } from "../../components/PaymentList";
+
 import { useMask } from "@react-input/mask";
 import { ZodError, z } from "zod";
 import { validateCpf } from "../../utils/validateCpf";
 import { FormEvent, useState } from "react";
 import { gql } from "@apollo/client";
 import { client } from "../../services/apollo";
-import { PaymentList } from "../../components/PaymentList";
+import { MainText } from "../../globals";
 
 
 interface Payments {
@@ -66,13 +69,13 @@ export default function Home() {
   };
 
   return (
-    <main className={styles.container}>
-      <h2 className={styles.mainText}>
+    <Container>
+      <MainText>
         Olá, seja bem vindo(a)! Digite seu CPF para listar seus pagamentos ou crie um novo pagamento.
-      </h2>
+      </MainText>
 
       <form onSubmit={handleSubmit}>
-        <div className={styles.inputWrapper}>
+        <div className="inputWrapper">
           <Input
             label="CPF"
             name="cpf"
@@ -86,7 +89,7 @@ export default function Home() {
             }}
           />
 
-          <Link to="/payment/new" className={styles.buttonNew}>
+          <Link to="/payment/new" className="buttonNew">
             Novo
           </Link>
         </div>
@@ -97,6 +100,6 @@ export default function Home() {
 
         <Button text="Listar pagamentos" type="submit" />
       </form>
-    </main>
+    </Container>
   );
 };

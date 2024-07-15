@@ -1,4 +1,6 @@
-.container {
+import styled from "styled-components";
+
+export const Container = styled.div`
   position: relative;
 
   width: 100%;
@@ -30,21 +32,21 @@
     border-bottom: 12px solid transparent;
     border-right: 12px solid white;
   }
-}
 
-.container abbr{
-  text-decoration: none;
-}
+  abbr{
+    text-decoration: none;
+  }
 
-.text {
-  font-family: 'Nunito', sans-serif;
-  font-weight: 600;
-  font-size: 16px;
-  color: white;
+  .text {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    color: white;
 
-  overflow: hidden;
+    overflow: hidden;
 
-  max-width: 90%;
-  text-wrap: nowrap;
-  text-overflow: ellipsis;
-}
+    max-width: 90%;
+    text-wrap: nowrap;
+    text-overflow: ellipsis;
+  }
+`;

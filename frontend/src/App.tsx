@@ -5,10 +5,12 @@ import Payment from "./pages/payment";
 import NewPayment from "./pages/newPayment";
 import { Simulation } from "./pages/simulation";
 import Home from "./pages/home";
+import { GlobalStyles } from "./globals";
 
 function App() {
   return (
     <Router>
+      <GlobalStyles />
       <Routes>
         <Route path="/" element={<RootLayout />} >
           <Route index element={<Home />} />

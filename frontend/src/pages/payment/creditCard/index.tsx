@@ -1,5 +1,3 @@
-import styles from "./styles.module.css";
-
 import { Button } from "../../../components/Button";
 import { Input } from "../../../components/Input";
 import { Select } from "../../../components/Select";
@@ -16,6 +14,8 @@ import { useParams } from "react-router-dom";
 import { LoadingIcon } from "../../../components/LoadingIcon";
 import { PaymentContext } from "../../../contexts/PaymentContext";
 import { currencyFormatter } from "../../../utils/currencyFormater";
+
+import { Container } from "./styles";
 
 interface FormInfos {
   name: string,
@@ -175,7 +175,7 @@ export function CreditCard() {
   };
 
   return (
-    <form className={styles.container} onSubmit={handleSubmit}>
+    <Container onSubmit={handleSubmit}>
       {success && <Success />}
 
       <Input
@@ -211,7 +211,7 @@ export function CreditCard() {
         errorMessage={errors.cardNumber}
       />
 
-      <section className={styles.inputWrapper}>
+      <section className="inputWrapper">
         <Input
           required
           label={"Vencimento (MM/YY)"}
@@ -255,6 +255,6 @@ export function CreditCard() {
       >
         {loading ? <LoadingIcon /> : "Pagar"}
       </Button>
-    </form>
+    </Container>
   )
 }

@@ -1,9 +1,9 @@
-import styles from "./styles.module.css";
+import { Container } from "./styles";
 
 export function Expired() {
   return (
-    <article className={styles.container}>
-      <div className={styles.circle}>
+    <Container>
+      <div className="circle">
         <img
           src="/denied-icon.svg"
           alt="Negado"
@@ -13,6 +13,6 @@ export function Expired() {
       <h3>
         Prazo de pagamento expirado
       </h3>
-    </article>
+    </Container>
   )
 }

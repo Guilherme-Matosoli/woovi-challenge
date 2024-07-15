@@ -1,12 +1,13 @@
 import { useMask } from "@react-input/mask";
 import { Button } from "../../components/Button";
 import { Input } from "../../components/Input";
-import styles from "./styles.module.css";
 import { validateCpf } from "../../utils/validateCpf";
 import { z, ZodError } from "zod";
 import { FormEvent, useContext, useState } from "react";
 import { PaymentContext } from "../../contexts/PaymentContext";
 import { useNavigate } from "react-router-dom";
+import { Container } from "./styles";
+import { MainText } from "../../globals";
 
 
 interface FormInfos {
@@ -80,11 +81,11 @@ export default function NewPayment() {
   };
 
   return (
-    <main className={styles.container}>
-      <h2 className={styles.mainText}>
+    <Container>
+      <MainText className="mainText">
         Digite seus dados abaixo para iniciar um novo pagamento:
-      </h2>
-      <form className={styles.form} onSubmit={handleSubmit}>
+      </MainText>
+      <form className="form" onSubmit={handleSubmit}>
         <Input
           label="Nome completo"
           name="name"
@@ -111,6 +112,6 @@ export default function NewPayment() {
           type="submit"
         />
       </form>
-    </main>
+    </Container>
   )
 }

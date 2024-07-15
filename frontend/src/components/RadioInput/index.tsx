@@ -1,12 +1,11 @@
 import { InputHTMLAttributes } from "react";
-import styles from "./styles.module.css";
+import { Input } from "./styles";
 
 interface RadioInputProps extends InputHTMLAttributes<HTMLInputElement> { };
 
 export function RadioInput(props: RadioInputProps) {
   return (
-    <input
-      className={styles.input}
+    <Input
       type="radio"
       name="installment"
       {...props}
