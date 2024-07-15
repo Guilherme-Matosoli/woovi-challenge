@@ -15,7 +15,9 @@ interface PaymentListProps {
 };
 
 export function PaymentList({ payments }: PaymentListProps) {
-  console.log(payments)
+
+  if (payments?.length! < 1) return <h3 className={styles.warning}>Você ainda não fez um pagamento, clique em "Novo" e comece um novo!</h3>
+
   return (
     <section className={styles.container}>
       {
