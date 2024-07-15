@@ -82,7 +82,7 @@ export default function NewPayment() {
   return (
     <main className={styles.container}>
       <h2 className={styles.mainText}>
-        Olá, seja bem vindo! Digite seus dados abaixo:
+        Digite seus dados abaixo para iniciar um novo pagamento:
       </h2>
       <form className={styles.form} onSubmit={handleSubmit}>
         <Input
