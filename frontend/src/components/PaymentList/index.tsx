@@ -24,6 +24,7 @@ export function PaymentList({ payments }: PaymentListProps) {
         payments && payments.map((payment, index) => {
           return (
             <PaymentCard
+              key={payment.id}
               index={index}
               totalItems={payments.length - 1}
               payment={payment}
