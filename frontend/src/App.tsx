@@ -4,12 +4,14 @@ import RootLayout from "./layout";
 import Payment from "./pages/payment";
 import NewPayment from "./pages/newPayment";
 import { Simulation } from "./pages/simulation";
+import Home from "./pages/home";
 
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<RootLayout />} >
+          <Route index element={<Home />} />
           <Route path="/payment/new" element={<NewPayment />} />
           <Route path="/payment/installments" element={<Installments />} />
           <Route path="/payment/pay/:paymentId" element={<Payment />} />
