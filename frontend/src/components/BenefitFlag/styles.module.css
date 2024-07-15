@@ -32,6 +32,10 @@
   }
 }
 
+.container abbr{
+  text-decoration: none;
+}
+
 .text {
   font-family: 'Nunito', sans-serif;
   font-weight: 600;
