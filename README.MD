@@ -80,7 +80,7 @@
 
 # Rotas
 
-- /home - Home Page
+- / - Home Page
 - /payment/installments - Página de parcelas
 - /payment/pay/:paymentId - Página de pagamento (paymentId como parâmetro)
 - /simulation/:paymentId - Página de simulação do pix (paymentId como parâmetro)
