@@ -42,7 +42,7 @@
     "expired": "Prazo de pagamento expirado",
     "pix": {
       "copied": "Copiado!",
-      "copyText": "Clique aqui para copiar o QR CODE"
+      "copyText": "Clique para copiar o QR CODE"
     }
   },
   "components": {
@@ -55,6 +55,6 @@
     },
     "paymentCard": "Parcelas",
     "paymentList": "Você ainda não fez um pagamento, clique em 'Novo' e comece um novo!",
-    "sucess": "Pagamento realizado com sucesso!"
+    "success": "Pagamento realizado com sucesso!"
   }
 }
