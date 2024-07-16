@@ -13,7 +13,7 @@ export const Container = styled.article`
     font-family: var(--primary-font);
     font-weight: 800;
     font-size: 24px;
-    color: var(--primary-color);
+    color: var(--red-color);
   }
 
   .circle {
