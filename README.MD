@@ -33,7 +33,7 @@
 
 #### Resolvi colocar máscara nos inputs de CPF, número do cartão e data de validade para melhor retorno visual do client. Os inputs de CPF e cartão de crédito são validados por meio de cálculos (Algorítmo de Luhn para o cartão de crédito).
 
-#### Foquei em construir um frontend preparado para integrar com o backend. Para simular o backend, fiz a API mock e, assim, deixar o frontend mais fácil de ser integrado à uma "api oficial".
+#### Foquei em construir um frontend preparado para integrar com o backend. Para simular o backend, fiz a API mock e integrei na aplicação. Assim, quando o frontend for "conectado" à uma "api oficial", essa integração será muito mais fácil, visto que o frontend já está preparado para receber/enviar as requisições necessárias (mediante à alterações com base no backend oficial).
 ---
 
 ## Layout principal
