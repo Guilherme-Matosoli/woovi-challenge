@@ -3,7 +3,7 @@
 ## Frontend:
 - [React](https://legacy.reactjs.org/) - Para construção da interface
 - [Styled-Components](https://styled-components.com/) - Para estilação "in js"
-- [i18next]("https://www.i18next.com/") - Para globalização da aplicação
+- [i18next](https://www.i18next.com/) - Para globalização da aplicação
 - [@apollo/client](https://www.apollographql.com/docs/react/api/core/ApolloClient/) - Para fazer conexão com o backend (GraphQL).
 - [socket.io-client](https://www.npmjs.com/package/socket.io-client) - Para comunicação em tempo real com o backend via WebSocket.
 - [Material UI (MUI)](https://mui.com/components/) - Para construção rápida e estilizada de componentes.
