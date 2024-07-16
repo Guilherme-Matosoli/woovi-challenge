@@ -45,6 +45,8 @@
 
 #### A página home tem como intuito ajudar o usuário a se localizar na aplicação. Caso ele já tenha algum pagamento, ele pode o listar, senão ele pode começar um novo pagamento clicando no botão de "Novo".
 
+#### Listar os pagamentos é uma opção indispensável, pois é inviável o usuário lembrar todos os pagamentos que ele tem e/ou ter que guardar o ID de todos os pagamentos.
+
 ---
 
 

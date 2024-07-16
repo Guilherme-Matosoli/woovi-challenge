@@ -100,22 +100,22 @@ export default function Payment() {
 
       <MainText>
         {
-          concluded && `${clientFirstName}, ${t("payment.mainText.congratulations")}`
+          !paymentExpired && concluded && `${clientFirstName}, ${t("payment.mainText.congratulations")}`
         }
         {
-          !concluded && paymentSteps == 1 && installment?.quantity == 1 && !paymentExpired && `${clientFirstName}, ${t("payment.mainText.firstPayment.1")} ${installmentValue} ${"payment.mainText.firstPayment.2"}`
-        }
-
-        {
-          !concluded && paymentSteps == 1 && installment?.quantity! > 1 && `${clientFirstName}, ${t("payment.mainText.enter.1")} ${installmentValue} ${t("payment.mainText.enter.2")}`
+          !paymentExpired && !concluded && paymentSteps == 1 && installment?.quantity == 1 && !paymentExpired && `${clientFirstName}, ${t("payment.mainText.firstPayment.1")} ${installmentValue} ${"payment.mainText.firstPayment.2"}`
         }
 
         {
-          !concluded && paymentSteps > 1 && paymentSteps != installment?.quantity && `${clientFirstName}, ${t("payment.mainText.installment.1")} ${paymentSteps}ª ${t("payment.mainText.installment.1")}`
+          !paymentExpired && !concluded && paymentSteps == 1 && installment?.quantity! > 1 && `${clientFirstName}, ${t("payment.mainText.enter.1")} ${installmentValue} ${t("payment.mainText.enter.2")}`
         }
 
         {
-          !concluded && paymentSteps == installment?.quantity && installment.quantity != 1 && `${clientFirstName}, ${t("payment.mainText.rest")}`
+          !paymentExpired && !concluded && paymentSteps > 1 && paymentSteps != installment?.quantity && `${clientFirstName}, ${t("payment.mainText.installment.1")} ${paymentSteps}ª ${t("payment.mainText.installment.1")}`
+        }
+
+        {
+          !paymentExpired && !concluded && paymentSteps == installment?.quantity && installment.quantity != 1 && `${clientFirstName}, ${t("payment.mainText.rest")}`
         }
       </MainText>
 
