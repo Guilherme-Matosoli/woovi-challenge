@@ -35,11 +35,11 @@ export function Pix() {
               t("payment.pix.copied")
               :
               <>
+                {t("payment.pix.copyText")}
                 <img
                   src="/copy-icon.svg"
                   alt="Copiar"
                 />
-                {t("payment.pix.copyText")}
               </>
           }
         </Button>
