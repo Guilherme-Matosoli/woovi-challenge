@@ -13,6 +13,7 @@ import { gql } from "@apollo/client";
 import { client } from "../../services/apollo";
 import { MainText } from "../../globals";
 import { useTranslation } from "react-i18next";
+import { LanguageSwitcher } from "../../components/LanguageSwitcher";
 
 
 interface Payments {
@@ -73,6 +74,8 @@ export default function Home() {
 
   return (
     <Container>
+      <LanguageSwitcher />
+
       <MainText>
         {t("home.mainText")}
       </MainText>

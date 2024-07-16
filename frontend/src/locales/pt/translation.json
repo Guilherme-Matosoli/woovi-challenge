@@ -1,5 +1,6 @@
 {
   "home": {
+    "translation": "Mudar linguagem",
     "mainText": "Olá, seja bem vindo(a)! Digite seu CPF para listar seus pagamentos ou crie um novo pagamento.",
     "new": "Novo",
     "listPayments": "Listar pagamentos"
