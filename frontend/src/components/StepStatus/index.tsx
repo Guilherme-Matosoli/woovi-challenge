@@ -1,4 +1,4 @@
-import styles from "./styles.module.css";
+import { Container } from "./styles";
 
 interface StepStatusProps {
   haveNext: boolean,
@@ -8,10 +8,10 @@ interface StepStatusProps {
 
 export function StepStatus({ haveNext, checked, actual }: StepStatusProps) {
   return (
-    <div className={`${styles.container} ${actual && styles.actual} ${haveNext && styles.next} ${checked && styles.checked}`}>
+    <Container className={`${actual && 'actual'} ${haveNext && 'next'} ${checked && 'checked'}`}>
       {
         checked && <img src="/checked-icon.svg" alt="Etapa concluída" />
       }
-    </div>
+    </Container>
   )
 }

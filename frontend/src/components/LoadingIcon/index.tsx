@@ -1,9 +1,9 @@
-import styles from "./styles.module.css";
+import { Container } from "./styles";
 
 export function LoadingIcon() {
   return (
-    <div className={styles.container}>
+    <Container>
 
-    </div>
+    </Container>
   )
 }

@@ -53,6 +53,7 @@ type PixInfo {
 }
 
 type Query {
+  getAllPayments(cpf: String!): [PaymentModel!]!
   installment: [InstallmentModel!]!
   payment(id: String!): PaymentModel
 }

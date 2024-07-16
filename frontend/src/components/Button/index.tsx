@@ -1,5 +1,5 @@
 import { ButtonHTMLAttributes } from "react";
-import styles from "./styles.module.css";
+import { Container } from "./styles";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   text?: string,
@@ -8,9 +8,9 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 export function Button({ text, children, ...rest }: ButtonProps) {
   return (
-    <button className={styles.container} {...rest}>
+    <Container {...rest}>
       {text}
       {children}
-    </button>
+    </Container>
   )
 }

@@ -1,0 +1,60 @@
+{
+  "home": {
+    "translation": "Change language",
+    "mainText": "Hello, welcome! Enter your CPF to list your payments or create a new payment.",
+    "new": "New",
+    "listPayments": "List payments"
+  },
+  "installments": {
+    "howPay": "How do you want to pay?",
+    "continueToPayment": "Proceed to payment"
+  },
+  "newPayment": {
+    "mainText": "Enter your details below to start a new payment:",
+    "name": "Full name",
+    "chooseInstallment": "Choose installments"
+  },
+  "payment": {
+    "mainText": {
+      "congratulations": "Congratulations! You have completed the payment!",
+      "firstPayment": {
+        "1": "Pay the amount of",
+        "2": "via Pix"
+      },
+      "enter": {
+        "1": "Pay the entry of",
+        "2": "via Pix"
+      },
+      "installment": {
+        "1": "Pay the",
+        "2": "installment in 1x on the card."
+      },
+      "rest": "Pay the remaining amount in 1x on the card"
+    },
+    "identifier": "Identifier",
+    "creditCard": {
+      "name": "Full name",
+      "cardNumber": "Card number",
+      "cardValidate": "Expiration date (MM/YY)",
+      "installment": "Installments",
+      "pay": "Pay"
+    },
+    "expired": "Payment deadline expired",
+    "pix": {
+      "copied": "Copied!",
+      "copyText": "Click here to copy the QR CODE"
+    }
+  },
+  "components": {
+    "accordion": "How does it work?",
+    "deadline": "Payment deadline",
+    "footer": "100% secure payment via:",
+    "installmentCard": {
+      "1": "Earn",
+      "2": "Cashback"
+    },
+    "paymentCard": "Installments",
+    "paymentList": "You haven't made a payment yet, click on 'New' and start a new one!",
+    "success": "Payment successfully completed!"
+  }
+}

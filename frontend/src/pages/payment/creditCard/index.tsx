@@ -1,5 +1,3 @@
-import styles from "./styles.module.css";
-
 import { Button } from "../../../components/Button";
 import { Input } from "../../../components/Input";
 import { Select } from "../../../components/Select";
@@ -16,6 +14,9 @@ import { useParams } from "react-router-dom";
 import { LoadingIcon } from "../../../components/LoadingIcon";
 import { PaymentContext } from "../../../contexts/PaymentContext";
 import { currencyFormatter } from "../../../utils/currencyFormater";
+
+import { Container } from "./styles";
+import { useTranslation } from "react-i18next";
 
 interface FormInfos {
   name: string,
@@ -174,13 +175,15 @@ export function CreditCard() {
     };
   };
 
+  const { t } = useTranslation();
+
   return (
-    <form className={styles.container} onSubmit={handleSubmit}>
+    <Container onSubmit={handleSubmit}>
       {success && <Success />}
 
       <Input
         required
-        label="Nome completo"
+        label={t("payment.creditCard.name")}
         name="name"
 
         value={formInfos.name}
@@ -201,7 +204,7 @@ export function CreditCard() {
       />
       <Input
         required
-        label="Número do cartão"
+        label={t("payment.creditCard.cardNumber")}
         name="cardNumber"
         inputRef={ccNumberMask}
 
@@ -211,7 +214,7 @@ export function CreditCard() {
         errorMessage={errors.cardNumber}
       />
 
-      <section className={styles.inputWrapper}>
+      <section className="inputWrapper">
         <Input
           required
           label={"Vencimento (MM/YY)"}
@@ -239,7 +242,7 @@ export function CreditCard() {
       </section>
 
       <Select
-        label="Parcelas"
+        label={t("payment.creditCard.installment")}
         value={formInfos.installments}
         onChange={setInfos}
         options={[
@@ -253,8 +256,8 @@ export function CreditCard() {
       <Button
         type="submit"
       >
-        {loading ? <LoadingIcon /> : "Pagar"}
+        {loading ? <LoadingIcon /> : t("payment.creditCard.pay")}
       </Button>
-    </form>
+    </Container>
   )
 }

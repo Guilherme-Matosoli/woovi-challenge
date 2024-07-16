@@ -1,21 +1,24 @@
-import styles from "./styles.module.css";
+import { useTranslation } from "react-i18next";
+import { Container } from "./styles";
 
 export function Footer() {
+  const { t } = useTranslation();
+
   return (
-    <footer className={styles.container}>
+    <Container>
       <img
         src="/security-badge.svg"
         alt="Ícone de segurança"
       />
 
-      <span className={styles.text}>
-        Pagamento 100% seguro via:
+      <span className="text">
+        {t("components.footer")}
       </span>
 
       <img
         src="/footer-logo.svg"
         alt="Woovi"
       />
-    </footer>
+    </Container>
   )
 }

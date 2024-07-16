@@ -1,0 +1,60 @@
+{
+  "home": {
+    "translation": "Mudar linguagem",
+    "mainText": "Olá, seja bem vindo(a)! Digite seu CPF para listar seus pagamentos ou crie um novo pagamento.",
+    "new": "Novo",
+    "listPayments": "Listar pagamentos"
+  },
+  "installments": {
+    "howPay": "como você quer pagar?",
+    "continueToPayment": "Prosseguir para o pagamento"
+  },
+  "newPayment": {
+    "mainText": "Digite seus dados abaixo para iniciar um novo pagamento:",
+    "name": "Nome completo",
+    "chooseInstallment": "Escolher parcelas"
+  },
+  "payment": {
+    "mainText": {
+      "congratulations": "parabéns! Você concluiu todo o pagamento!",
+      "firstPayment": {
+        "1": "pague o valor de",
+        "2": "no pix"
+      },
+      "enter": {
+        "1": "pague a entrada de",
+        "2": "no pix"
+      },
+      "installment": {
+        "1": "pague a",
+        "2": "parcela em 1x no cartão."
+      },
+      "rest": "pague o restante em 1x no cartão"
+    },
+    "identifier": "Identificador",
+    "creditCard": {
+      "name": "Nome completo",
+      "cardNumber": "Número do cartão",
+      "cardValidate": "Vencimento (MM/AA)",
+      "installment": "Parcelas",
+      "pay": "Pagar"
+    },
+    "expired": "Prazo de pagamento expirado",
+    "pix": {
+      "copied": "Copiado!",
+      "copyText": "Clique aqui para copiar o QR CODE"
+    }
+  },
+  "components": {
+    "accordion": "Como funciona?",
+    "deadline": "Prazo de pagamento",
+    "footer": "Pagamento 100% seguro via:",
+    "installmentCard": {
+      "1": "Ganhe",
+      "2": "de Cashback"
+    },
+    "paymentCard": "Parcelas",
+    "paymentList": "Você ainda não fez um pagamento, clique em 'Novo' e comece um novo!",
+    "sucess": "Pagamento realizado com sucesso!"
+  }
+}

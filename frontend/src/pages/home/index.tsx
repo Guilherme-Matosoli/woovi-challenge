@@ -1,26 +1,45 @@
-import { useMask } from "@react-input/mask";
-import { Button } from "../../components/Button";
+import { Container } from "./styles";
+
+import { Link } from "react-router-dom";
 import { Input } from "../../components/Input";
-import styles from "./styles.module.css";
+import { Button } from "../../components/Button";
+import { PaymentList } from "../../components/PaymentList";
+
+import { useMask } from "@react-input/mask";
+import { ZodError, z } from "zod";
 import { validateCpf } from "../../utils/validateCpf";
-import { z, ZodError } from "zod";
-import { FormEvent, useContext, useState } from "react";
-import { PaymentContext } from "../../contexts/PaymentContext";
-import { useNavigate } from "react-router-dom";
+import { FormEvent, useState } from "react";
+import { gql } from "@apollo/client";
+import { client } from "../../services/apollo";
+import { MainText } from "../../globals";
+import { useTranslation } from "react-i18next";
+import { LanguageSwitcher } from "../../components/LanguageSwitcher";
 
 
-interface FormInfos {
-  name: string,
-  cpf: string
+interface Payments {
+  id: string,
+  installment: {
+    quantity: number,
+    value: number
+  },
+  steps: number
 };
 
+const GET_PAYMENTS = gql`
+  query($cpf: String!){
+    getAllPayments(cpf: $cpf){
+      id
+      concluded
+      installment{
+        quantity
+        value
+      }
+      steps
+    }
+  }
+`;
 
 const schema = z.object({
-  name: z
-    .string()
-    .min(5, "Nome inválido")
-    .regex(/^[\p{L}\p{M}\s]+$/u, "Nome inválido"),
-
   cpf: z
     .string()
     .min(14, "CPF inválido")
@@ -29,88 +48,64 @@ const schema = z.object({
 });
 
 export default function Home() {
-  const { setClientInfo } = useContext(PaymentContext);
-
   const cpfMask = useMask({ mask: '___.___.___-__', replacement: { _: /\d/ } });
-  const [formInfos, setFormInfos] = useState<FormInfos>({
-    name: '',
-    cpf: ''
-  });
+  const [cpf, setCpf] = useState<string>('');
+  const [cpfError, setCpfError] = useState<string>();
 
-  const [errors, setErrors] = useState<Partial<Record<keyof FormInfos, string>>>({
-    name: undefined,
-    cpf: undefined
-  });
+  const [payments, setPayments] = useState<Payments[]>();
 
-  const setInfos = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-
-    setFormInfos(current => ({
-      ...current,
-      [name]: value || ''
-    }));
-
-    setErrors(current => ({
-      ...current,
-      [name]: undefined
-    }));
-  };
-
-  const navigate = useNavigate();
-
-  const handleSubmit = (e: FormEvent) => {
+  async function handleSubmit(e: FormEvent) {
     e.preventDefault();
 
     try {
-      const data = schema.parse(formInfos);
-      setClientInfo(data);
+      schema.parse({ cpf });
 
-      navigate('/payment/installments');
+      const query = await client.query({ query: GET_PAYMENTS, variables: { cpf } });
+      setPayments(query.data.getAllPayments);
     }
     catch (err) {
       if (err instanceof ZodError) {
-        err.errors.forEach(error => {
-          setErrors(current => ({
-            ...current,
-            [error.path[0]]: error.message
-          }));
-        });
+        setCpfError(err.errors[0].message)
       };
     };
   };
 
+  const { t } = useTranslation();
+
   return (
-    <main className={styles.container}>
-      <h2 className={styles.mainText}>
-        Olá, seja bem vindo! Digite seus dados abaixo:
-      </h2>
-      <form className={styles.form} onSubmit={handleSubmit}>
-        <Input
-          label="Nome completo"
-          name="name"
-          required
-          errorMessage={errors.name}
+    <Container>
+      <LanguageSwitcher />
 
-          value={formInfos.name}
-          onChange={setInfos}
-        />
+      <MainText>
+        {t("home.mainText")}
+      </MainText>
 
-        <Input
-          label="CPF"
-          name="cpf"
-          required
-          errorMessage={errors.cpf}
-          inputRef={cpfMask}
+      <form onSubmit={handleSubmit}>
+        <div className="inputWrapper">
+          <Input
+            label="CPF"
+            name="cpf"
+            errorMessage={cpfError}
+            inputRef={cpfMask}
 
-          value={formInfos.cpf}
-          onChange={setInfos}
-        />
+            value={cpf}
+            onChange={e => {
+              setCpf(e.target.value);
+              setCpfError(undefined);
+            }}
+          />
 
-        <Button
-          text="Escolher parcelas"
-          type="submit"
-        />
+          <Link to="/payment/new" className="buttonNew">
+            {t("home.new")}
+          </Link>
+        </div>
+
+        {
+          payments && <PaymentList payments={payments} />
+        }
+
+        <Button text={t("home.listPayments")} type="submit" />
       </form>
-    </main>
-  )
-}
+    </Container>
+  );
+};

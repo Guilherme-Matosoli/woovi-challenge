@@ -1,15 +1,18 @@
+import { useTranslation } from "react-i18next";
 import { ApprovedIcon } from "../ApprovedIcon";
-import styles from "./styles.module.css";
+import { Container } from "./styles";
 
 
 export function Success() {
+  const { t } = useTranslation()
+
   return (
-    <article className={styles.container}>
+    <Container>
       <ApprovedIcon />
 
       <h2>
-        Pagamento realizado com sucesso!
+        {t("components.success")}
       </h2>
-    </article>
+    </Container>
   )
 }

@@ -2,8 +2,9 @@
 import { InputHTMLAttributes, useMemo } from "react";
 import { BenefitFlag } from "../BenefitFlag";
 import { RadioInput } from "../RadioInput";
-import styles from "./styles.module.css";
 import { currencyFormatter } from "../../utils/currencyFormater";
+import { Container } from "./styles";
+import { useTranslation } from "react-i18next";
 
 interface InstallmentCardProps extends InputHTMLAttributes<HTMLInputElement> {
   installmentQuantity: number,
@@ -33,20 +34,22 @@ export function InstallmentCard({ mainTitle, benefitText, installmentQuantity, i
   }, [installmentQuantity]);
 
   const handleContainer = () => {
-    if (!index) return styles.container;
-    if (index == 1) return styles.containerFirst;
-    if (index == totalItems) return styles.containerLast;
-    return styles.containerList
+    if (!index) return "solo";
+    if (index == 1) return "first";
+    if (index == totalItems) return "last";
+    return "middle"
   };
 
+  const { t } = useTranslation();
+
   return (
-    <div className={handleContainer()}>
-      <label>      <span className={mainTitle ? styles.mainCardInfo : styles.hidden}>
+    <Container className={handleContainer()}>
+      <label>      <span className={mainTitle ? "mainCardInfo" : "hidden"}>
         {mainTitle}
       </span>
 
-        <div className={styles.topSide}>
-          <div className={styles.installmentInfo}>
+        <div className="topSide">
+          <div className="installmentInfo">
             <span>{installmentQuantity}x </span> {formatedQuantity}
           </div>
 
@@ -54,12 +57,12 @@ export function InstallmentCard({ mainTitle, benefitText, installmentQuantity, i
         </div>
         {
           installmentQuantity == 1 ? (
-            <span className={styles.bonusInfo}>
-              Ganhe <strong>3%</strong> de Cashback
+            <span className="bonusInfo">
+              {t("components.installmentCard.1")} <strong>3%</strong> {t("components.installmentCard.2")}
             </span>
           ) :
             (
-              <span className={styles.total}>Total: {formatedTotal}</span>
+              <span className="total">Total: {formatedTotal}</span>
             )
         }
 
@@ -67,6 +70,6 @@ export function InstallmentCard({ mainTitle, benefitText, installmentQuantity, i
           benefitText && <BenefitFlag text={benefitText} />
         }
       </label>
-    </div>
+    </Container>
   )
 }

@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from "react";
 import { AccordionUsage } from "../../components/Accordion";
 import { Deadline } from "../../components/Deadline";
 import { PaymentProgress } from "../../components/PaymentProgress";
-import styles from "./styles.module.css";
 import { PaymentContext } from "../../contexts/PaymentContext";
 import { Pix } from "./pix";
 import { CreditCard } from "./creditCard";
@@ -14,6 +13,9 @@ import { isExpired } from "../../utils/isExpired";
 import { Expired } from "./expired";
 import { Success } from "../../components/Success";
 import { ApprovedIcon } from "../../components/ApprovedIcon";
+import { Container } from "./styles";
+import { MainText } from "../../globals";
+import { useTranslation } from "react-i18next";
 
 const GET_PAYMENT = gql`
   query($id: String!){
@@ -87,33 +89,35 @@ export default function Payment() {
   const clientFirstName = clientInfo?.name.split(" ")[0];
   const paymentExpired = isExpired(pixInfo?.expiresIn!) && paymentSteps == 1;
 
+  const { t } = useTranslation();
+
   return !loading && clientInfo && (
-    <main className={styles.container}>
+    <Container>
 
       {paymentSuccess && <Success />}
 
       {loading && <LoadingIcon />}
 
-      <h2 className={styles.mainText}>
+      <MainText>
         {
-          concluded && `${clientFirstName}, parabéns! Você concluiu todo o pagamento!`
+          concluded && `${clientFirstName}, ${t("payment.mainText.congratulations")}`
         }
         {
-          !concluded && paymentSteps == 1 && installment?.quantity == 1 && !paymentExpired && `${clientFirstName}, pague o valor de ${installmentValue} no pix`
-        }
-
-        {
-          !concluded && paymentSteps == 1 && installment?.quantity! > 1 && `${clientFirstName}, pague a entrada de ${installmentValue} no pix`
+          !concluded && paymentSteps == 1 && installment?.quantity == 1 && !paymentExpired && `${clientFirstName}, ${t("payment.mainText.firstPayment.1")} ${installmentValue} ${"payment.mainText.firstPayment.2"}`
         }
 
         {
-          !concluded && paymentSteps > 1 && paymentSteps != installment?.quantity && `${clientFirstName}, pague a ${paymentSteps}ª parcela em 1x no cartão`
+          !concluded && paymentSteps == 1 && installment?.quantity! > 1 && `${clientFirstName}, ${t("payment.mainText.enter.1")} ${installmentValue} ${t("payment.mainText.enter.2")}`
         }
 
         {
-          !concluded && paymentSteps == installment?.quantity && installment.quantity != 1 && `${clientFirstName}, pague o restante em 1x no cartão`
+          !concluded && paymentSteps > 1 && paymentSteps != installment?.quantity && `${clientFirstName}, ${t("payment.mainText.installment.1")} ${paymentSteps}ª ${t("payment.mainText.installment.1")}`
         }
-      </h2>
+
+        {
+          !concluded && paymentSteps == installment?.quantity && installment.quantity != 1 && `${clientFirstName}, ${t("payment.mainText.rest")}`
+        }
+      </MainText>
 
       {
         concluded && <ApprovedIcon />
@@ -137,22 +141,22 @@ export default function Payment() {
       />
       <PaymentProgress />
 
-      <section className={styles.fee}>
-        <span className={styles.info}>
+      <section className="fee">
+        <span className="info">
           CET: 0,5%
         </span>
 
-        <span className={styles.value}>
+        <span className="value">
           Total: {total}
         </span>
       </section>
 
       <AccordionUsage />
 
-      <section className={styles.paymentId}>
-        <span>Identificador:</span>
+      <section className="paymentId">
+        <span>{t("payment.identifier")}:</span>
         <strong>{pixInfo?.identifier}</strong>
       </section>
-    </main>
+    </Container>
   )
 }

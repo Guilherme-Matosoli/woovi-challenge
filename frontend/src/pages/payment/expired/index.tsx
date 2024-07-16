@@ -1,9 +1,12 @@
-import styles from "./styles.module.css";
+import { useTranslation } from "react-i18next";
+import { Container } from "./styles";
 
 export function Expired() {
+  const { t } = useTranslation();
+
   return (
-    <article className={styles.container}>
-      <div className={styles.circle}>
+    <Container>
+      <div className="circle">
         <img
           src="/denied-icon.svg"
           alt="Negado"
@@ -11,8 +14,8 @@ export function Expired() {
       </div>
 
       <h3>
-        Prazo de pagamento expirado
+        {t("payment.expired")}
       </h3>
-    </article>
+    </Container>
   )
 }

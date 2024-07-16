@@ -1,5 +1,4 @@
 import { InstallmentCard } from "../../components/InstallmentCard";
-import styles from "./styles.module.css";
 
 import { FormEvent, useContext, useEffect, useState } from "react";
 import { Button } from "../../components/Button";
@@ -7,6 +6,9 @@ import { useNavigate } from "react-router-dom";
 import { PaymentContext } from "../../contexts/PaymentContext";
 import { gql, useMutation, useQuery } from "@apollo/client";
 import { LoadingIcon } from "../../components/LoadingIcon";
+import { Container } from "./styles";
+import { MainText } from "../../globals";
+import { useTranslation } from "react-i18next";
 
 
 const GET_INSTALLMENTS = gql`
@@ -92,23 +94,25 @@ export default function Installments() {
     });
   };
 
-  return options && (
-    <main className={styles.container}>
-      <h2 className={styles.mainText}>
-        {clientInfo?.name.split(" ")[0]}, como você quer pagar?
-      </h2>
+  const { t } = useTranslation();
 
-      <form className={styles.form} onSubmit={handleSubmit}>
+  return options && (
+    <Container>
+      <MainText>
+        {clientInfo?.name.split(" ")[0]}, {t("installments.howPay")}
+      </MainText>
+
+      <form className="form" onSubmit={handleSubmit}>
         <Button
           disabled={!installment ? true : false}
           type="submit"
         >
           {
-            loading ? <LoadingIcon /> : "Prosseguir para o pagamento"
+            loading ? <LoadingIcon /> : t("installments.continueToPayment")
           }
         </Button>
 
-        <section className={styles.oneTime}>
+        <section className="oneTime">
           <InstallmentCard
             value={JSON.stringify(options[0].installment)}
             onChange={e => setInstallment(JSON.parse(e.target.value))}
@@ -120,7 +124,7 @@ export default function Installments() {
           />
         </section>
 
-        <section className={styles.installments}>
+        <section className="installments">
           {
             options.map((item, index) => {
               if (index == 0) return;
@@ -147,10 +151,10 @@ export default function Installments() {
           type="submit"
         >
           {
-            loading ? <LoadingIcon /> : "Prosseguir para o pagamento"
+            loading ? <LoadingIcon /> : t("installments.continueToPayment")
           }
         </Button>
       </form>
-    </main>
+    </Container>
   )
 }

@@ -1,6 +1,6 @@
 import { ApolloClient, InMemoryCache } from "@apollo/client";
 
-const serverUri = "http://localhost:4000";
+const serverUri = import.meta.env.VITE_API;
 
 export const client = new ApolloClient({
   uri: serverUri,

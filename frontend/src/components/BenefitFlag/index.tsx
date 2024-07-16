@@ -1,4 +1,4 @@
-import styles from "./styles.module.css";
+import { Container } from "./styles";
 
 interface BenefitFlagProps {
   text: string
@@ -6,12 +6,12 @@ interface BenefitFlagProps {
 
 export function BenefitFlag({ text }: BenefitFlagProps) {
   return (
-    <div className={styles.container}>
+    <Container>
       <abbr title={text}>
-      <span className={styles.text}>
+      <span className="text">
         {text}
       </span>
       </abbr>
-    </div>
+    </Container>
   )
 };
