@@ -16,6 +16,10 @@ export const Container = styled.article`
 
   padding: 21px;
 
+  &.normal{
+    border-radius: 10px;
+  }
+
   &.first{
     border-radius: 10px 10px 0 0;
     border-bottom: none;

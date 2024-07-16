@@ -21,6 +21,7 @@ interface PaymentCardProps {
 export function PaymentCard({ index, totalItems, payment }: PaymentCardProps) {
 
   const handleContainer = () => {
+    if (index == 0 && totalItems == 0) return "normal"
     if (index == 0) return "first";
     if (index == totalItems) return "last";
     return "middle"
