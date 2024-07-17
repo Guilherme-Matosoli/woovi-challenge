@@ -5,13 +5,20 @@ import { RadioInput } from "../RadioInput";
 import { currencyFormatter } from "../../utils/currencyFormater";
 import { Container } from "./styles";
 import { useTranslation } from "react-i18next";
+import i18n from "../../i18n";
 
 interface InstallmentCardProps extends InputHTMLAttributes<HTMLInputElement> {
   installmentQuantity: number,
   installmentValue: number,
 
-  mainTitle?: string,
-  benefitText?: string,
+  mainTitle?: {
+    en: string,
+    pt: string
+  },
+  benefitText?: {
+    en: string,
+    pt: string
+  },
 
   index?: number,
   totalItems?: number,
@@ -41,12 +48,17 @@ export function InstallmentCard({ mainTitle, benefitText, installmentQuantity, i
   };
 
   const { t } = useTranslation();
+  const currentLanguage = i18n.language as "en" | "pt";
 
   return (
     <Container className={handleContainer()}>
-      <label>      <span className={mainTitle ? "mainCardInfo" : "hidden"}>
-        {mainTitle}
-      </span>
+      <label>
+        {
+          mainTitle &&
+          <span className="mainCardInfo">
+            {mainTitle[currentLanguage]}
+          </span>
+        }
 
         <div className="topSide">
           <div className="installmentInfo">
@@ -67,7 +79,7 @@ export function InstallmentCard({ mainTitle, benefitText, installmentQuantity, i
         }
 
         {
-          benefitText && <BenefitFlag text={benefitText} />
+          benefitText && <BenefitFlag text={benefitText[currentLanguage]} />
         }
       </label>
     </Container>
