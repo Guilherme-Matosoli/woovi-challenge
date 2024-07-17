@@ -1,15 +1,32 @@
 import { Field, ObjectType } from "type-graphql";
 import { Installment } from "./PaymentModel";
 
+@ObjectType()
+class MainTitle {
+  @Field()
+  pt: string
+
+  @Field()
+  en: string
+};
+
+@ObjectType()
+class benefit {
+  @Field()
+  pt: string
+
+  @Field()
+  en: string
+};
 
 @ObjectType()
 export class InstallmentModel {
   @Field(() => Installment)
   installment: Installment
 
-  @Field(() => String, { nullable: true })
-  mainTitle?: string
+  @Field(() => MainTitle, { nullable: true })
+  mainTitle?: MainTitle
 
-  @Field(() => String, { nullable: true })
-  benefit?: string
-}
+  @Field(() => MainTitle, { nullable: true })
+  benefit?: MainTitle
+};

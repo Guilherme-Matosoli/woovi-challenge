@@ -14,8 +14,14 @@ import { useTranslation } from "react-i18next";
 const GET_INSTALLMENTS = gql`
   query{
     installment{
-      benefit
-      mainTitle
+      benefit{
+        en
+        pt
+      }
+      mainTitle{
+        en
+        pt
+      }
       installment {
         quantity
         value
@@ -44,9 +50,15 @@ interface OptionsInstallment {
     quantity: number,
     value: number,
   },
-  mainTitle?: string,
-  benefit?: string
-}
+  mainTitle?: {
+    pt: string,
+    en: string
+  },
+  benefit?: {
+    pt: string,
+    en: string
+  }
+};
 
 export default function Installments() {
   const [options, setOptions] = useState<OptionsInstallment[]>();

@@ -7,15 +7,24 @@ const Installments = [
       quantity: 1,
       value: 3050000
     },
-    mainTitle: "Pix",
-    benefit: "🤑 R$ 300,00 de volta no seu Pix na hora"
+    mainTitle: {
+      pt: "Pix",
+      en: "Pix"
+    },
+    benefit: {
+      pt: "🤑 R$ 300,00 de volta no seu Pix na hora",
+      en: "🤑 R$ 300.00 back on your Pix instantly"
+    }
   },
   {
     installment: {
       quantity: 2,
       value: 1530000
     },
-    mainTitle: "Pix parcelado"
+    mainTitle: {
+      pt: "Pix parcelado",
+      en: "Pix in installments"
+    }
   },
   {
     installment: {
@@ -28,7 +37,10 @@ const Installments = [
       quantity: 4,
       value: 772500
     },
-    benefit: "-3% de juros: Melhor opção de parcelamento"
+    benefit: {
+      pt: "-3% de juros: Melhor opção de parcelamento",
+      en: "-3% interest: Best installment option"
+    }
   },
   {
     installment: {

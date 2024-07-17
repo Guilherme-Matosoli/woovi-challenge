@@ -55,6 +55,11 @@
     },
     "paymentCard": "Parcelas",
     "paymentList": "Você ainda não fez um pagamento, clique em 'Novo' e comece um novo!",
+    "paymentStep": {
+      "first": "Pagamento no pix",
+      "enter": "1ª entrada no pix",
+      "card": "no cartão"
+    },
     "success": "Pagamento realizado com sucesso!"
   }
 }

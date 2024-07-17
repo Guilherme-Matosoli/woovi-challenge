@@ -5,6 +5,7 @@ export function LanguageSwitcher() {
   const { t, i18n } = useTranslation();
 
   const changeLanguage = (lng: string) => {
+    localStorage.setItem("lng", lng);
     i18n.changeLanguage(lng);
   };
 
