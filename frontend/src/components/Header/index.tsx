@@ -3,7 +3,7 @@ import { Container } from "./styles"
 export function Header() {
   return (
     <Container>
-      <a href="https://woovi.com/#home" target="_blank">
+      <a href="/">
         <img
           src="/logo.svg"
           alt="Woovi"
