@@ -35,7 +35,7 @@
     "creditCard": {
       "name": "Full name",
       "cardNumber": "Card number",
-      "cardValidate": "Expiration date (MM/YY)",
+      "cardValidate": "Expire date (MM/YY)",
       "installment": "Installments",
       "pay": "Pay"
     },

@@ -217,7 +217,7 @@ export function CreditCard() {
       <section className="inputWrapper">
         <Input
           required
-          label={"Vencimento (MM/YY)"}
+          label={t("payment.creditCard.cardValidate")}
           name="cardValidate"
           inputRef={ccValidateMask}
 
