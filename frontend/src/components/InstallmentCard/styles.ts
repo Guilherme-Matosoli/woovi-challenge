@@ -10,7 +10,14 @@ export const Container = styled.div`
 
   transition: background .3s;
 
-  padding: 21px;
+
+  label{
+    padding: 21px;
+
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
 
   &.solo{
     border-radius: 10px;
