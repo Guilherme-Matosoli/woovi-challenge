@@ -105,7 +105,9 @@ export default function Payment() {
     return `${clientFirstName}, ${t("payment.mainText.rest")}`;
   };
 
-  return !loading && clientInfo && (
+  if (loading) return <Container> <LoadingIcon /> </Container>
+
+  return clientInfo && (
     <Container>
 
       {paymentSuccess && <Success />}

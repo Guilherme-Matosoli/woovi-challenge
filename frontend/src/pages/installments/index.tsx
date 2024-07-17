@@ -108,6 +108,8 @@ export default function Installments() {
 
   const { t } = useTranslation();
 
+  if (!options) return <Container><LoadingIcon /></Container>
+
   return options && (
     <Container>
       <MainText>

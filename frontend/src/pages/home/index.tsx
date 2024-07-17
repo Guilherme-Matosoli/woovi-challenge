@@ -14,6 +14,7 @@ import { client } from "../../services/apollo";
 import { MainText } from "../../globals";
 import { useTranslation } from "react-i18next";
 import { LanguageSwitcher } from "../../components/LanguageSwitcher";
+import { LoadingIcon } from "../../components/LoadingIcon";
 
 
 interface Payments {
@@ -57,9 +58,11 @@ export default function Home() {
   const [cpfError, setCpfError] = useState<string>();
 
   const [payments, setPayments] = useState<Payments[]>();
+  const [loading, setLoading] = useState(false);
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
+    setLoading(true);
 
     try {
       schema.parse({ cpf });
@@ -71,7 +74,8 @@ export default function Home() {
       if (err instanceof ZodError) {
         setCpfError(err.errors[0].message)
       };
-    };
+    }
+    finally { setLoading(false) };
   };
 
   return (
@@ -106,7 +110,11 @@ export default function Home() {
           payments && <PaymentList payments={payments} />
         }
 
-        <Button text={t("home.listPayments")} type="submit" />
+        <Button type="submit">
+          {
+            loading ? <LoadingIcon /> : t("home.listPayments")
+          }
+        </Button>
       </form>
     </Container>
   );
