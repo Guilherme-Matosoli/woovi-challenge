@@ -3,6 +3,7 @@ import { StepStatus } from "../StepStatus";
 import { currencyFormatter } from "../../utils/currencyFormater";
 import { PaymentContext } from "../../contexts/PaymentContext";
 import { Container } from "./styles";
+import { useTranslation } from "react-i18next";
 
 interface PaymentStepProps {
   installmentNumber: number,
@@ -21,6 +22,7 @@ export function PaymentStep({ installmentNumber, installmentsQuantity, installme
   }, [installmentValue]);
 
   const { paymentSteps } = useContext(PaymentContext);
+  const { t } = useTranslation();
 
   return (
     <Container>
@@ -32,11 +34,11 @@ export function PaymentStep({ installmentNumber, installmentsQuantity, installme
         />
 
         <span className="description">
-          {installmentNumber == 1 && installmentsQuantity == 1 && "Pagamento no pix"}
+          {installmentNumber == 1 && installmentsQuantity == 1 && t("components.paymentStep.first")}
 
-          {installmentNumber == 1 && installmentsQuantity != 1 && "1ª entrada no pix"}
+          {installmentNumber == 1 && installmentsQuantity != 1 && t("components.paymentStep.enter")}
 
-          {installmentNumber != 1 && `${installmentNumber}ª no cartão`}
+          {installmentNumber != 1 && `${installmentNumber}ª ${t("components.paymentStep.card")}`}
         </span>
       </div>
 

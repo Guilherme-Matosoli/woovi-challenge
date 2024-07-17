@@ -55,6 +55,11 @@
     },
     "paymentCard": "Installments",
     "paymentList": "You haven't made a payment yet, click on 'New' and start a new one!",
+    "paymentStep": {
+      "first": "Payment on pix",
+      "enter": "First entry on pix",
+      "card": "in credit card"
+    },
     "success": "Payment successfully completed!"
   }
 }
