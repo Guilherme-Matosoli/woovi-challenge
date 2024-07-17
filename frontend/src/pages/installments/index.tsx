@@ -14,8 +14,14 @@ import { useTranslation } from "react-i18next";
 const GET_INSTALLMENTS = gql`
   query{
     installment{
-      benefit
-      mainTitle
+      benefit{
+        en
+        pt
+      }
+      mainTitle{
+        en
+        pt
+      }
       installment {
         quantity
         value
