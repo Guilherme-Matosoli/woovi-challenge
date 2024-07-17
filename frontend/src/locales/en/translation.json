@@ -1,4 +1,14 @@
 {
+  "validations": {
+    "name": "Invalid name",
+    "cpf": "Invalid CPF",
+    "cardNumber": "Invalid card number",
+    "date": {
+      "format": "Invalid date format (MM/YY)",
+      "invalid": "Invalid date"
+    },
+    "cvv": "Invalid CVV"
+  },
   "home": {
     "translation": "Change language",
     "mainText": "Hello, welcome! Enter your CPF to list your payments or create a new payment.",

@@ -1,4 +1,14 @@
 {
+  "validations": {
+    "name": "Nome inválido",
+    "cpf": "CPF inválido",
+    "cardNumber": "Cartão inválido",
+    "date": {
+      "format": "Formato de data inválido (MM/AA)",
+      "invalid": "Data inválida"
+    },
+    "cvv": "CVV inválido"
+  },
   "home": {
     "translation": "Mudar linguagem",
     "mainText": "Olá, seja bem vindo(a)! Digite seu CPF para listar seus pagamentos ou crie um novo pagamento.",

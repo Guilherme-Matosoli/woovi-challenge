@@ -18,6 +18,8 @@ import { currencyFormatter } from "../../../utils/currencyFormater";
 import { Container } from "./styles";
 import { useTranslation } from "react-i18next";
 
+import i18n from "../../../i18n";
+
 interface FormInfos {
   name: string,
   cpf: string,
@@ -33,36 +35,38 @@ mutation ($id: String!){
   }
 `;
 
-const schema = z.object({
-  name: z
-    .string()
-    .min(5, "Nome inválido")
-    .regex(/^[\p{L}\p{M}\s]+$/u, "Nome inválido"),
-
-  cpf: z
-    .string()
-    .min(14, "CPF inválido")
-    .regex(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/, "CPF inválido")
-    .refine(validateCpf, "CPF inválido"),
-
-  cardNumber: z
-    .string()
-    .min(19, "Cartão inválido")
-    .regex(/^\d{4} \d{4} \d{4} \d{4}$/, "Cartão inválido")
-    .refine(luhnAlgorithm, "Cartão inválido"),
-
-  cardValidate: z
-    .string()
-    .min(4, "Formato de data inválido (MM/AA)")
-    .regex(/^(0[1-9]|1[0-2])\/\d{2}$/, "Formato de data inválido (MM/AA)")
-    .refine(validateExpiryDate, "Data inválida"),
-
-  cardCvv: z
-    .string()
-    .min(3, "Cvv inválido")
-});
-
 export function CreditCard() {
+  const { t } = useTranslation();
+
+  const schema = z.object({
+    name: z
+      .string()
+      .min(5, t("validations.name"))
+      .regex(/^[\p{L}\p{M}\s]+$/u, t("validations.name")),
+
+    cpf: z
+      .string()
+      .min(14, t("validaitons.cpf"))
+      .regex(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/, t("validations.cpf"))
+      .refine(validateCpf, t("validations.cpf")),
+
+    cardNumber: z
+      .string()
+      .min(19, t("validations.cardNumber"))
+      .regex(/^\d{4} \d{4} \d{4} \d{4}$/, t("validations.cardNumber"))
+      .refine(luhnAlgorithm, t("validations.cardNumber")),
+
+    cardValidate: z
+      .string()
+      .min(4, t("validations.date.format"))
+      .regex(/^(0[1-9]|1[0-2])\/\d{2}$/, t("validations.date.format"))
+      .refine(validateExpiryDate, t("validations.date.invalid")),
+
+    cardCvv: z
+      .string()
+      .min(3, "Cvv inválido")
+  });
+
   const { paymentId } = useParams();
   const { clientInfo, installment } = useContext(PaymentContext);
 
@@ -174,8 +178,6 @@ export function CreditCard() {
       };
     };
   };
-
-  const { t } = useTranslation();
 
   return (
     <Container onSubmit={handleSubmit}>

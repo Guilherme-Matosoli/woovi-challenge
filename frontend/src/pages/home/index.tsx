@@ -39,15 +39,19 @@ const GET_PAYMENTS = gql`
   }
 `;
 
-const schema = z.object({
-  cpf: z
-    .string()
-    .min(14, "CPF inválido")
-    .regex(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/, "CPF inválido")
-    .refine(validateCpf, "CPF inválido"),
-});
 
 export default function Home() {
+  const { t } = useTranslation();
+
+  const schema = z.object({
+    cpf: z
+      .string()
+      .min(14, t("validations.cpf"))
+      .regex(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/, t("validations.cpf"))
+      .refine(validateCpf, t("validations.cpf")),
+  });
+
+
   const cpfMask = useMask({ mask: '___.___.___-__', replacement: { _: /\d/ } });
   const [cpf, setCpf] = useState<string>('');
   const [cpfError, setCpfError] = useState<string>();
@@ -69,8 +73,6 @@ export default function Home() {
       };
     };
   };
-
-  const { t } = useTranslation();
 
   return (
     <Container>

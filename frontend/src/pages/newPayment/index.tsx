@@ -17,20 +17,22 @@ interface FormInfos {
 };
 
 
-const schema = z.object({
-  name: z
-    .string()
-    .min(5, "Nome inválido")
-    .regex(/^[\p{L}\p{M}\s]+$/u, "Nome inválido"),
-
-  cpf: z
-    .string()
-    .min(14, "CPF inválido")
-    .regex(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/, "CPF inválido")
-    .refine(validateCpf, "CPF inválido"),
-});
-
 export default function NewPayment() {
+  const { t } = useTranslation();
+
+  const schema = z.object({
+    name: z
+      .string()
+      .min(5, t("validations.name"))
+      .regex(/^[\p{L}\p{M}\s]+$/u, t("validations.name")),
+
+    cpf: z
+      .string()
+      .min(14, t("validations.cpf"))
+      .regex(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/, t("validations.cpf"))
+      .refine(validateCpf, t("validations.cpf")),
+  });
+
   const { setClientInfo } = useContext(PaymentContext);
 
   const cpfMask = useMask({ mask: '___.___.___-__', replacement: { _: /\d/ } });
@@ -80,8 +82,6 @@ export default function NewPayment() {
       };
     };
   };
-
-  const { t } = useTranslation();
 
   return (
     <Container>
