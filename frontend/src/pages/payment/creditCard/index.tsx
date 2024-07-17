@@ -18,7 +18,6 @@ import { currencyFormatter } from "../../../utils/currencyFormater";
 import { Container } from "./styles";
 import { useTranslation } from "react-i18next";
 
-import i18n from "../../../i18n";
 
 interface FormInfos {
   name: string,
