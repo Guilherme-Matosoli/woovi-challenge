@@ -1,3 +1,7 @@
+<p style="text-align: center;"> 
+  <a style="font-size: 24px;" href="https://woovi-challenge-zeta.vercel.app">➡️Link do desafiodesafio⬅️</a>
+</p>
+
 # Tecnologias usadas
 
 ## Frontend:
@@ -18,6 +22,8 @@
 - [Socket.io](https://socket.io/) - Para implementação simples de um websocket.
 - [MongoDB](https://www.mongodb.com) - Para armazenamento de informações
 
+<br/>
+<br/>
 
 # DECISÕES
 
