@@ -19,9 +19,14 @@ type Installment {
 }
 
 type InstallmentModel {
-  benefit: String
+  benefit: MainTitle
   installment: Installment!
-  mainTitle: String
+  mainTitle: MainTitle
+}
+
+type MainTitle {
+  en: String!
+  pt: String!
 }
 
 type Mutation {
