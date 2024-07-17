@@ -14,6 +14,8 @@ export const io = new Server({
   cors: { "origin": "*" }
 });
 
+const { PORT } = process.env;
+
 async function initialize() {
   await databaseConnection
   console.log("DATABASE CONNECT SUCCESS")
@@ -31,7 +33,7 @@ async function initialize() {
   });
 
   io.listen(4001);
-  const { url } = await server.listen("4000");
+  const { url } = await server.listen(PORT || "4000"); 
   console.log(`Server running on ${url}`)
 };
 
