@@ -1,5 +1,5 @@
 <p style="text-align: center;"> 
-  <a style="font-size: 24px;" href="https://woovi-challenge-zeta.vercel.app">➡️Link do desafiodesafio⬅️</a>
+  <a style="font-size: 24px;" href="https://woovi-challenge-zeta.vercel.app">➡️Link do desafio⬅️</a>
 </p>
 
 # Tecnologias usadas
